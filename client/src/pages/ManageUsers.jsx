@@ -8,12 +8,10 @@ import {
   Users,
   Search,
   ShieldCheck,
-  ShieldAlert,
   Trash2,
   CheckCircle2,
   AlertCircle,
-  CalendarCheck,
-  CreditCard
+  Crown
 } from 'lucide-react';
 
 const ManageUsers = () => {
@@ -44,7 +42,7 @@ const ManageUsers = () => {
 
   const handleRoleToggle = async (userId, currentRole) => {
     const newRole = currentRole === 'admin' ? 'user' : 'admin';
-    if (!window.confirm(`Are you sure you want to change this user's role to ${newRole.toUpperCase()}?`)) {
+    if (!window.confirm(`Are you sure you want to change this member's role to ${newRole.toUpperCase()}?`)) {
       return;
     }
 
@@ -93,9 +91,14 @@ const ManageUsers = () => {
         {/* Header */}
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-3 border-bottom">
           <div>
-            <span className="section-tag">Account Governance</span>
-            <h1 className="display-6 fw-bold font-serif text-dark mb-1">User Directory & Permissions</h1>
-            <p className="text-muted mb-0">Total of {users.length} registered guest and administrator accounts</p>
+            <div className="d-flex align-items-center gap-2 mb-1">
+              <span className="badge-royal">
+                <Crown size={12} className="me-1" /> शाही नामावली
+              </span>
+              <span className="text-muted small">Account Governance</span>
+            </div>
+            <h1 className="display-6 fw-bold font-regal text-dark mb-1">Guest Directory & Roles</h1>
+            <p className="text-muted mb-0">Total of {users.length} registered royal patrons and palace dewan accounts</p>
           </div>
         </div>
 
@@ -114,7 +117,7 @@ const ManageUsers = () => {
         )}
 
         {/* Search */}
-        <div className="card luxury-card p-3 mb-4 border-0">
+        <div className="card luxury-card p-3 mb-4 border-0 shadow-sm" style={{ backgroundColor: '#ffffff' }}>
           <div className="row g-3">
             <div className="col-12 col-md-8">
               <div className="input-group">
@@ -124,7 +127,7 @@ const ManageUsers = () => {
                 <input
                   type="text"
                   className="form-control border-start-0 ps-0"
-                  placeholder="Search by full name, email address, or phone..."
+                  placeholder="Search by royal title, name, email address, or phone..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
@@ -140,7 +143,7 @@ const ManageUsers = () => {
 
         {/* Users Table */}
         {loading ? (
-          <LoadingSpinner text="Retrieving guest roster..." />
+          <LoadingSpinner text="Retrieving royal patron roster..." />
         ) : filteredUsers.length === 0 ? (
           <EmptyState
             title="No Users Match"
@@ -149,16 +152,16 @@ const ManageUsers = () => {
             onAction={() => setSearch('')}
           />
         ) : (
-          <div className="card luxury-card border-0 p-3">
+          <div className="card luxury-card border-0 p-3 shadow-sm" style={{ backgroundColor: '#ffffff' }}>
             <div className="table-responsive">
               <table className="table table-hover align-middle mb-0">
                 <thead className="table-light">
                   <tr className="small text-muted text-uppercase">
-                    <th>User</th>
+                    <th>Royal Member</th>
                     <th>Contact Phone</th>
                     <th>Role</th>
                     <th>Stays Booked</th>
-                    <th>Total Spend</th>
+                    <th>Total Tariff Spent (INR)</th>
                     <th>Joined</th>
                     <th className="text-end">Actions</th>
                   </tr>
@@ -171,14 +174,14 @@ const ManageUsers = () => {
                         <td>
                           <div className="d-flex align-items-center gap-3">
                             <div
-                              className="rounded-circle bg-dark text-warning fw-bold d-flex align-items-center justify-content-center"
-                              style={{ width: '38px', height: '38px' }}
+                              className="rounded-circle fw-bold d-flex align-items-center justify-content-center"
+                              style={{ width: '38px', height: '38px', backgroundColor: '#6e0d25', color: '#c99a3e' }}
                             >
                               {u.name?.charAt(0) || 'U'}
                             </div>
                             <div>
-                              <div className="fw-bold text-dark">
-                                {u.name} {isSelf && <span className="badge bg-warning text-dark ms-1 small">You</span>}
+                              <div className="fw-bold text-dark font-regal">
+                                {u.name} {isSelf && <span className="badge badge-royal ms-1 small">You</span>}
                               </div>
                               <div className="text-muted small">{u.email}</div>
                             </div>
@@ -187,7 +190,7 @@ const ManageUsers = () => {
                         <td className="small text-secondary">{u.phone || 'N/A'}</td>
                         <td>
                           <span className={`badge ${u.role === 'admin' ? 'bg-dark text-warning border border-warning' : 'bg-secondary-subtle text-secondary'}`}>
-                            {u.role === 'admin' ? 'Admin' : 'Guest'}
+                            {u.role === 'admin' ? 'Palace Dewan (Admin)' : 'Honored Guest'}
                           </span>
                         </td>
                         <td className="small">
@@ -195,8 +198,8 @@ const ManageUsers = () => {
                             {u.totalBookings || 0} Stays
                           </span>
                         </td>
-                        <td className="fw-bold text-dark font-serif">
-                          ${u.totalSpent || 0}
+                        <td className="fw-bold text-dark font-regal" style={{ color: '#6e0d25' }}>
+                          ₹{(u.totalSpent || 0).toLocaleString('en-IN')}
                         </td>
                         <td className="small text-muted">
                           {new Date(u.createdAt).toLocaleDateString()}
@@ -211,7 +214,7 @@ const ManageUsers = () => {
                                   className="btn btn-sm btn-outline-secondary py-1 px-2 small"
                                   title="Toggle User/Admin Role"
                                 >
-                                  {u.role === 'admin' ? 'Demote to Guest' : 'Promote to Admin'}
+                                  {u.role === 'admin' ? 'Demote to Guest' : 'Promote to Dewan'}
                                 </button>
                                 <button
                                   type="button"
@@ -223,7 +226,7 @@ const ManageUsers = () => {
                                 </button>
                               </>
                             ) : (
-                              <span className="text-muted small fst-italic">Active Session</span>
+                              <span className="text-muted small fst-italic">Active Dewan Session</span>
                             )}
                           </div>
                         </td>

@@ -1,37 +1,37 @@
-# HotelPro – Complete Hotel Booking and Management System
+# HotelPro – Royal Heritage Hotel Booking and Management System
 
-HotelPro is a full-stack, enterprise-grade hotel booking and management platform designed for guests and hotel administrators. Built on the modern MERN stack (React 18, Node.js, Express, MongoDB/Mongoose) with Bootstrap 5 and Chart.js, it combines five-star luxury UI/UX aesthetics with robust algorithmic date overlap availability checking and mock payment workflows.
+HotelPro is a full-stack, enterprise-grade royal heritage hotel booking and operations management platform designed for guests and palace administrators. Infused with a **Royal Indian Palace Vibe** ("Live Like a Maharaja", Rajputana/Udaipur palace themes, "अतिथि देवो भव", Haveli suites, ₹ INR tariffs, and RuPay/UPI demo workflows), the project is built on the modern MERN stack (React 18, Node.js, Express, MongoDB/Mongoose) with Bootstrap 5 and Chart.js.
 
 ---
 
 ## 1. Project Overview
 
-HotelPro provides an end-to-end hospitality experience:
-- **For Discerning Guests:** Browse luxury suites, check real-time guaranteed room availability based on booking date overlap, review pricing breakdowns, make reservations, simulate payments via a dedicated mock gateway, and print official stay vouchers and invoices.
-- **For Hotel Administrators:** Access an executive command center featuring live KPI stat cards, interactive revenue and occupancy charts, comprehensive room inventory CRUD, guest status management (Check-in, Check-out, Cancellation), and user account directory controls.
+HotelPro provides an end-to-end luxury hospitality experience:
+- **For Discerning Guests:** Browse royal palace suites, check real-time guaranteed chamber availability based on algorithmic booking date overlap, review ₹ INR pricing breakdowns, make reservations, simulate payments via a dedicated RuPay/UPI/NetBanking mock gateway, and print official **Shahi Farman** stay vouchers and invoices.
+- **For Palace Administrators (Dewan):** Access an executive Darbar command center featuring live KPI stat cards, interactive revenue and occupancy charts, comprehensive palace chamber inventory CRUD, guest status management (Check-in, Check-out, Cancellation), and user account directory controls.
 
 ---
 
 ## 2. Key Features
 
-### 🛎️ Guest & Public Features
-- **Premium Landing Page:** High-definition photography, floating search widget, curated suites, hotel facilities, luxury testimonials, and FAQ accordion.
+### 👑 Royal Guest & Public Features
+- **Royal Heritage Landing Page:** High-definition Lake Pichola twilight palace hero, floating royal search widget, "पधारो म्हारे देश" Rajasthani ethos, Shahi Dawat dining, Baoli stepwell pool, Ayurvedic wellness sanctuary, and royal testimonials.
 - **Date Overlap Availability Engine:** Real-time query logic preventing double bookings by comparing requested dates against existing active reservations (`checkIn < requestedCheckOut && checkOut > requestedCheckIn`).
-- **Comprehensive Room Directory:** Filter by room category, bed type, price range slider, guest count, and sorting options.
-- **Interactive Room Details:** Multi-photo gallery, complete amenities checklist, room specifications, and live price calculator.
-- **Mock Payment Gateway:** Fully simulated checkout with credit card formatting, CVV validation, 1-click test card auto-filler, and instant confirmation generation.
-- **Guest Dashboard & Booking Voucher:** Real-time countdown to next check-in, historical stay tracking, and printable PDF/paper voucher with QR reference.
-- **Guest Profile Management:** Update name, contact phone, and change passwords with bcrypt security.
+- **Palace Suite Directory:** Filter by royal chamber category (`Maharaja Presidential Suite`, `Maharani Royal Suite`, `Yuvraj Heritage Suite`, `Rajputana Deluxe Room`, `Haveli Courtyard Room`), bed configuration, ₹ INR tariff slider (₹5,000 to ₹60,000), guest count, and sorting options.
+- **Interactive Chamber Details:** Multi-photo gallery, complete heritage amenities checklist (Jharokha lake views, Khidmatgar butler service, Ayurvedic bath oils), and live tariff calculator with 12% Heritage GST.
+- **Royal Mock Payment Gateway:** Fully simulated checkout supporting **RuPay Platinum Card (with live virtual card display)**, **UPI (Google Pay, PhonePe, Paytm)**, and **Shahi NetBanking (SBI, HDFC, ICICI)**.
+- **Guest Dashboard & Shahi Farman Voucher:** Real-time countdown to next check-in, historical stay tracking, and printable PDF/paper voucher with QR reference and royal seal.
+- **Guest Profile Management:** Update title, contact phone (+91 format), and change passwords with bcrypt security.
 
-### 🛡️ Administrator Features
+### 🛡️ Administrator Features (शाही दीवान / Palace Dewan)
 - **Executive Operations Dashboard:**
-  - Real-time KPIs: Total Revenue, Total Bookings, Total Users, Available Rooms, Occupied Rooms, Maintenance Rooms, Confirmed Bookings, and Cancelled Stays.
+  - Real-time KPIs: Total Shahi Treasury Revenue (₹ INR), Total Bookings, Total Users, Available Suites, Occupied Chambers, Maintenance Chambers, Confirmed Stays, and Cancelled Stays.
   - Interactive Visual Charts: Monthly revenue & booking volume trends (Bar Chart) and booking status distribution (Doughnut Chart) powered by Chart.js.
   - Recent activity ledger with live status indicators.
-- **Room Management (CRUD):** Add new rooms with custom imagery and amenities, modify room rates, toggle room status (`Available`, `Occupied`, `Maintenance`), and delete inactive rooms.
+- **Palace Suite Management (CRUD):** Add new suites with custom imagery and heritage amenities, modify tariffs in ₹ INR, toggle chamber status (`Available`, `Occupied`, `Maintenance`), and delete inactive chambers.
 - **Booking Management:** Search and filter all reservations, update guest statuses (`Confirmed`, `Checked-In`, `Checked-Out`, `Cancelled`), and inspect full billing records.
-- **User Governance:** Inspect all registered guest accounts, total stays booked, lifetime spend, and toggle administrative privileges.
-- **Dedicated Staff Portal:** Secure admin login with role-based JWT middleware protection.
+- **User Governance:** Inspect all registered guest accounts, total stays booked, lifetime spend (₹ INR), and toggle administrative privileges.
+- **Dedicated Dewan Portal:** Secure admin login with role-based JWT middleware protection.
 
 ---
 
@@ -41,11 +41,12 @@ HotelPro provides an end-to-end hospitality experience:
 - **React.js 18** (Vite build tooling)
 - **Bootstrap 5.3 & Bootstrap Icons**
 - **Lucide React** (Modern luxury icons)
+- **Google Fonts** (`Cinzel`, `Cormorant Garamond`, `Playfair Display`)
 - **React Router DOM v6** (Nested routes & route guards)
 - **Axios** (With Bearer token interceptor and global error normalization)
 - **Chart.js & React-Chartjs-2** (Dashboard data visualizations)
 - **Context API** (`AuthContext` & `BookingContext`)
-- **Custom CSS Design System** (Plus Jakarta Sans & Playfair Display luxury typography)
+- **Royal Indian Design System** (Sindoor Maroon `#6e0d25`, Zari Gold `#c99a3e`, Peacock Midnight Navy `#0a1128`, Ivory Marble `#fdfcf9`)
 
 ### Backend (`server/`)
 - **Node.js** (v18+)
@@ -120,7 +121,7 @@ JWT_EXPIRE=7d
 
 ## 7. Database Setup & Seeding
 
-The database includes an automated seeder that populates 1 Administrator, 6 Guests, 12 Luxury Suites across 5 categories, 6 realistic Bookings, and verified Payment records.
+The database includes an automated seeder that populates 1 Administrator (Dewan), 6 Royal Guests, 12 Luxury Suites across 5 heritage categories, 6 realistic Bookings, and verified Payment records in ₹ INR.
 
 To run the seeder manually:
 ```bash
@@ -177,9 +178,9 @@ Open your browser at:
 | **PATCH** | `/api/rooms/:id/status`| Admin | Toggle room status |
 | **POST** | `/api/bookings` | Private | Create pending reservation |
 | **GET** | `/api/bookings/my` | Private | Get authenticated user's stays |
-| **GET** | `/api/bookings/:id` | Private | Get booking voucher / invoice |
+| **GET** | `/api/bookings/:id` | Private | Get booking voucher / invoice (Shahi Farman) |
 | **PUT** | `/api/bookings/:id/cancel` | Private | Cancel stay & issue refund record |
-| **POST** | `/api/payments` | Private | Process mock payment & confirm |
+| **POST** | `/api/payments` | Private | Process mock RuPay/UPI payment & confirm |
 | **GET** | `/api/payments/:bookingId` | Private | Retrieve payment receipt |
 | **GET** | `/api/admin/dashboard`| Admin | Dashboard metrics & chart datasets |
 | **GET** | `/api/admin/bookings` | Admin | Get all bookings with filtering |
@@ -196,68 +197,51 @@ A ready-to-import Postman collection is included in the root directory: `hotelpr
 
 | Role | Permissions & Capabilities |
 | :--- | :--- |
-| **Guest / User** | Browse rooms, search availability with date range, view room details, book rooms, pay via mock card, view booking vouchers, cancel bookings, update profile. |
-| **Administrator** | Access Admin Dashboard, view charts & KPIs, manage room inventory (CRUD), update room statuses, check-in & check-out guests, manage user accounts. |
+| **Guest / Royal Patron** | Browse palace chambers, search availability with date range, view suite details, book suites, pay via mock RuPay/UPI, view Shahi Farman vouchers, cancel bookings, update profile. |
+| **Administrator (Dewan)** | Access Admin Dashboard, view charts & KPIs in ₹ INR, manage chamber inventory (CRUD), update room statuses, check-in & check-out guests, manage user accounts. |
 
 ---
 
 ## 11. Demo Credentials (For Evaluation & Local Development)
 
-For rapid grading and live testing, both the Guest and Admin login pages feature **1-Click Auto-Fill Demo Credentials** buttons.
+Both the Guest and Admin login pages feature **1-Click Auto-Fill Demo Credentials** buttons.
 
-### Administrator Account
+### Palace Administrator (Dewan)
 - **Email:** `admin@hotelpro.com`
 - **Password:** `AdminPassword@123`
 - **Role:** Administrator (Full Permissions)
 
-### Sample Guest Account
-- **Email:** `sarah.jenkins@example.com`
+### Royal Guest Account (Princess Gayatri Devi)
+- **Email:** `princess.gayatri@mewarheritage.in`
 - **Password:** `GuestPassword@123`
-- **Role:** Guest Member
+- **Role:** Royal Patron Guest Member
 
-*(Additional guest accounts: `david.miller@example.com`, `emily.clark@example.com`, with password `GuestPassword@123`)*
+*(Additional guest accounts: `sarah.jenkins@example.com`, `david.miller@example.com`, `emily.clark@example.com`, with password `GuestPassword@123`)*
 
 ---
 
-## 12. Screenshots & Page Previews
+## 12. Complete Page Directory (21 Pages Implemented)
 
-```
-+-------------------------------------------------------------------------------+
-|  HotelPro                    Rooms & Suites   About   Contact   [Sign In]     |
-|                                                                               |
-|                   FIND YOUR PERFECT STAY                                      |
-|    Experience world-class architecture, handcrafted comfort, and 5-star ease  |
-|                                                                               |
-|   +-----------------------------------------------------------------------+   |
-|   | Check-in: 11/15 | Check-out: 11/18 | Guests: 2 | Category: Suite | [Search]|  |
-|   +-----------------------------------------------------------------------+   |
-+-------------------------------------------------------------------------------+
-|  [Featured Deluxe Room]        [Executive Suite]        [Penthouse Panorama]  |
-|  $199/night                    $299/night               $499/night            |
-+-------------------------------------------------------------------------------+
-```
-
-### Complete Page Directory (21 Pages Implemented):
-1. **Home (`/`)**: Premium landing page, hero search, facilities, categories, testimonials, CTA.
-2. **Rooms (`/rooms`)**: Live search, date overlap filtering, category/price filters, room cards.
-3. **Room Details (`/rooms/:id`)**: Gallery, amenity checklist, interactive booking widget, price calculation.
-4. **About Us (`/about`)**: Hotel history, leadership team, brand pillars, awards.
-5. **Contact & Concierge (`/contact`)**: Contact form, property map preview, hotlines, FAQ accordion.
-6. **Guest Login (`/login`)**: Email/password sign-in with 1-click guest & admin demo buttons.
+1. **Home (`/`)**: Royal heritage palace landing page, Lake Pichola hero, floating search, Baoli pool, Shahi Dawat dining, testimonials.
+2. **Rooms (`/rooms`)**: Live search, date overlap filtering, category/price filters (₹5,000–₹60,000), room cards.
+3. **Room Details (`/rooms/:id`)**: Multi-angle gallery, heritage amenity checklist, interactive booking widget, ₹ INR price calculation.
+4. **About Us (`/about`)**: 130-year Mewar lineage, royal trustees, brand pillars (अतिथि देवो भव), chronicle timeline.
+5. **Contact & Concierge (`/contact`)**: Shahi concierge form, property map preview, hotlines, FAQ accordion.
+6. **Guest Login (`/login`)**: Email/password sign-in with 1-click royal guest & admin demo buttons.
 7. **Guest Register (`/register`)**: Full validation and instant session initialization.
-8. **Guest Dashboard (`/dashboard`)**: Metric cards, next upcoming stay card, recent reservations.
-9. **My Profile (`/profile`)**: Update full name, phone number, and change password.
+8. **Guest Dashboard (`/dashboard`)**: Metric cards, next upcoming stay card, recent reservations in ₹ INR.
+9. **My Profile (`/profile`)**: Update full title, phone number (+91), and change password.
 10. **My Bookings (`/my-bookings`)**: Filter tabs (All, Upcoming, Completed, Cancelled), cancel actions.
-11. **Booking Details / Invoice (`/bookings/:id`)**: Printable reservation voucher with invoice table.
-12. **Payment Page (`/payment`)**: Demo checkout with live card preview, 1-click test card filler.
-13. **Booking Confirmation (`/confirmation`)**: Celebration screen with booking ID reference.
-14. **Admin Login (`/admin/login`)**: Dedicated staff portal authentication.
-15. **Admin Dashboard (`/admin/dashboard`)**: 8 KPI cards, Bar Chart, Doughnut Chart, recent ledger.
+11. **Booking Details / Invoice (`/bookings/:id`)**: Printable Shahi Farman stay voucher with invoice table.
+12. **Payment Page (`/payment`)**: Demo checkout with live RuPay card preview, UPI VPA simulation, and Indian NetBanking.
+13. **Booking Confirmation (`/confirmation`)**: Celebration screen with booking ID reference and royal arrival protocol.
+14. **Admin Login (`/admin/login`)**: Dedicated staff portal authentication with Dewan access.
+15. **Admin Dashboard (`/admin/dashboard`)**: 8 KPI cards, Bar Chart in ₹ INR, Doughnut Chart, recent ledger.
 16. **Manage Rooms (`/admin/rooms`)**: Inventory table with inline status toggles, edit & delete.
-17. **Add Room (`/admin/rooms/add`)**: Create room form with live preview and multi-amenity selectors.
-18. **Edit Room (`/admin/rooms/edit/:id`)**: Update room specifications and imagery.
+17. **Add Room (`/admin/rooms/add`)**: Create suite form with live preview and multi-amenity selectors.
+18. **Edit Room (`/admin/rooms/edit/:id`)**: Update chamber specifications and imagery.
 19. **Manage Bookings (`/admin/bookings`)**: Check-in, check-out, and cancellation operations.
-20. **Manage Users (`/admin/users`)**: User directory, booking counts, lifetime spend, role promotions.
+20. **Manage Users (`/admin/users`)**: User directory, booking counts, lifetime spend (₹ INR), role promotions.
 21. **Admin Profile (`/admin/profile`)**: Master password update and runtime environment summary.
 
 ---
@@ -270,11 +254,11 @@ hotelpro/
 │   ├── public/                 # Static assets & icons
 │   ├── src/
 │   │   ├── components/         # Reusable UI components
-│   │   │   ├── Navbar.jsx
-│   │   │   ├── Footer.jsx
-│   │   │   ├── RoomCard.jsx
-│   │   │   ├── SearchBox.jsx
-│   │   │   ├── AdminSidebar.jsx
+│   │   │   ├── Navbar.jsx      # Royal Palace Crest & Navigation
+│   │   │   ├── Footer.jsx      # Sanskrit Ethos & Heritage Details
+│   │   │   ├── RoomCard.jsx    # Tariff in ₹ INR with reserve action
+│   │   │   ├── SearchBox.jsx   # Royal date overlap search widget
+│   │   │   ├── AdminSidebar.jsx# Dewan navigation sidebar
 │   │   │   ├── ProtectedRoute.jsx
 │   │   │   ├── AdminRoute.jsx
 │   │   │   ├── LoadingSpinner.jsx
@@ -283,90 +267,36 @@ hotelpro/
 │   │   │   ├── AuthContext.jsx
 │   │   │   └── BookingContext.jsx
 │   │   ├── pages/              # 21 application pages
-│   │   │   ├── Home.jsx
-│   │   │   ├── Rooms.jsx
-│   │   │   ├── RoomDetails.jsx
-│   │   │   ├── About.jsx
-│   │   │   ├── Contact.jsx
-│   │   │   ├── Login.jsx
-│   │   │   ├── Register.jsx
-│   │   │   ├── UserDashboard.jsx
-│   │   │   ├── MyProfile.jsx
-│   │   │   ├── MyBookings.jsx
-│   │   │   ├── BookingDetails.jsx
-│   │   │   ├── BookingConfirmation.jsx
-│   │   │   ├── PaymentPage.jsx
-│   │   │   ├── AdminLogin.jsx
-│   │   │   ├── AdminDashboard.jsx
-│   │   │   ├── ManageRooms.jsx
-│   │   │   ├── AddRoom.jsx
-│   │   │   ├── EditRoom.jsx
-│   │   │   ├── ManageBookings.jsx
-│   │   │   ├── ManageUsers.jsx
-│   │   │   └── AdminProfile.jsx
 │   │   ├── services/           # Axios API configuration
-│   │   │   └── api.js
-│   │   ├── styles/             # Custom luxury design system
-│   │   │   └── custom.css
+│   │   ├── styles/             # Royal Indian Design System
+│   │   │   └── custom.css      # Maroon, Gold, Navy palette & Jharokhas
 │   │   ├── App.jsx             # Main Router switchboard
 │   │   └── main.jsx            # Application entry point
-│   ├── index.html
+│   ├── index.html              # Cinzel & Cormorant Garamond fonts
 │   ├── package.json
 │   └── vite.config.js
 │
 ├── server/                     # Backend Express REST API
 │   ├── config/
 │   │   └── db.js               # Mongoose & In-Memory MongoDB connector
-│   ├── controllers/
-│   │   ├── authController.js   # JWT Auth & Profile management
-│   │   ├── roomController.js   # Room CRUD & Date Overlap Availability
-│   │   ├── bookingController.js# Reservation workflows & cancellations
-│   │   ├── paymentController.js# Mock payment processor
-│   │   └── adminController.js  # Dashboard KPIs & Chart aggregations
-│   ├── middleware/
-│   │   ├── authMiddleware.js   # JWT Protect & AdminOnly guards
-│   │   └── errorMiddleware.js  # Centralized Express error handler
-│   ├── models/
-│   │   ├── User.js             # User Schema with bcrypt hook
-│   │   ├── Room.js             # Room & Amenity Schema
-│   │   ├── Booking.js          # Booking Schema
-│   │   └── Payment.js          # Payment Receipt Schema
-│   ├── routes/
-│   │   ├── authRoutes.js
-│   │   ├── roomRoutes.js
-│   │   ├── bookingRoutes.js
-│   │   ├── paymentRoutes.js
-│   │   └── adminRoutes.js
-│   ├── seed/
-│   │   ├── seedData.js         # Curated luxury rooms & user dataset
-│   │   └── seeder.js           # CLI and programmatic seed runner
-│   ├── utils/
-│   │   └── jwt.js              # Token signing utility
-│   ├── .env.example
-│   ├── package.json
+│   ├── controllers/            # Auth, Room, Booking, Payment, Admin
+│   ├── middleware/             # Auth JWT, AdminOnly, Error handlers
+│   ├── models/                 # User, Room (Royal categories), Booking, Payment
+│   ├── routes/                 # REST API endpoints
+│   ├── seed/                   # Royal Indian seed dataset & runner
 │   ├── server.js               # Express application entry point
 │   └── test-api.js             # Automated end-to-end API verification
 │
 ├── .gitignore
 ├── .env.example
 ├── hotelpro.postman_collection.json
-├── package.json                # Root orchestration scripts
+├── package.json
 └── README.md
 ```
 
 ---
 
-## 14. Future Enhancements
+## 14. License & Evaluation Notice
 
-- Integration with live Stripe / PayPal payment gateways
-- Real-time front-desk notifications via Socket.io
-- Multi-currency currency switcher (USD, EUR, GBP, JPY)
-- Guest loyalty points & reward redemption system
-- Multi-language localization (i18n)
-
----
-
-## 15. Contributors & Evaluation Notice
-
-- Developed as a production-grade full-stack hotel booking and operations management system.
+- Developed as a production-grade full-stack hotel booking and operations management system with a Royal Heritage Indian Palace Theme.
 - Suitable for university senior evaluations, portfolio presentations, mentor reviews, and production deployment.

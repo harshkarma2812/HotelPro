@@ -57,7 +57,7 @@ const seedDatabase = async () => {
       totalAmount: total1,
       bookingStatus: 'Confirmed',
       paymentStatus: 'Paid',
-      specialRequests: 'High floor preferred, arriving late around 8 PM.'
+      specialRequests: 'Lake view Jharokha suite preferred, arriving late around 8 PM with traditional Shahi Aarti welcome.'
     });
 
     await Payment.create({
@@ -65,7 +65,7 @@ const seedDatabase = async () => {
       booking: booking1._id,
       user: guestUsers[0]._id,
       amount: total1,
-      paymentMethod: 'Credit Card (Visa)',
+      paymentMethod: 'UPI / Google Pay (Demo)',
       paymentStatus: 'Paid',
       transactionId: 'TXN-HP948271',
       cardLastFour: '4242'
@@ -93,7 +93,7 @@ const seedDatabase = async () => {
       totalAmount: total2,
       bookingStatus: 'Checked-In',
       paymentStatus: 'Paid',
-      specialRequests: 'Honeymoon couple, complimentary champagne requested.'
+      specialRequests: 'Royal honeymoon couple, complimentary Marwar rose garland and evening sitar requested.'
     });
 
     await Payment.create({
@@ -101,7 +101,7 @@ const seedDatabase = async () => {
       booking: booking2._id,
       user: guestUsers[1]._id,
       amount: total2,
-      paymentMethod: 'Mastercard (Demo)',
+      paymentMethod: 'RuPay Platinum Card (Demo)',
       paymentStatus: 'Paid',
       transactionId: 'TXN-HP338291',
       cardLastFour: '8821'
@@ -129,7 +129,7 @@ const seedDatabase = async () => {
       totalAmount: total3,
       bookingStatus: 'Checked-Out',
       paymentStatus: 'Paid',
-      specialRequests: 'Quiet room for remote video conferences.'
+      specialRequests: 'Panchakarma Ayurvedic wellness consultation scheduled on arrival.'
     });
 
     await Payment.create({
@@ -137,7 +137,7 @@ const seedDatabase = async () => {
       booking: booking3._id,
       user: guestUsers[2]._id,
       amount: total3,
-      paymentMethod: 'American Express (Demo)',
+      paymentMethod: 'HDFC NetBanking (Demo)',
       paymentStatus: 'Paid',
       transactionId: 'TXN-HP662914',
       cardLastFour: '1004'
@@ -173,7 +173,7 @@ const seedDatabase = async () => {
       booking: booking4._id,
       user: guestUsers[3]._id,
       amount: total4,
-      paymentMethod: 'Visa (Demo)',
+      paymentMethod: 'UPI / PhonePe (Demo)',
       paymentStatus: 'Refunded',
       transactionId: 'TXN-HP119283',
       cardLastFour: '4242'
@@ -201,7 +201,7 @@ const seedDatabase = async () => {
       totalAmount: total5,
       bookingStatus: 'Confirmed',
       paymentStatus: 'Paid',
-      specialRequests: 'Traveling with 2 kids, extra towels and pool passes.'
+      specialRequests: 'Royal family holiday with children, stepwell pool passes and Rajasthani puppet show requested.'
     });
 
     await Payment.create({
@@ -209,13 +209,13 @@ const seedDatabase = async () => {
       booking: booking5._id,
       user: guestUsers[4]._id,
       amount: total5,
-      paymentMethod: 'Credit Card (Visa)',
+      paymentMethod: 'ICICI NetBanking (Demo)',
       paymentStatus: 'Paid',
       transactionId: 'TXN-HP552019',
       cardLastFour: '4242'
     });
 
-    // Booking 6: James Wilson - Pending stay in Standard Room 102
+    // Booking 6: James Wilson - Pending stay in Haveli Courtyard Room 102
     const checkIn6 = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 8);
     const checkOut6 = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 10);
     const nights6 = 2;
@@ -237,7 +237,7 @@ const seedDatabase = async () => {
       totalAmount: total6,
       bookingStatus: 'Pending',
       paymentStatus: 'Pending',
-      specialRequests: 'Early check-in around 11 AM if room is ready.'
+      specialRequests: 'Early arrival around 11 AM, requested traditional Rajasthani saffron thali for lunch.'
     });
 
     console.log('[Seeder] Database successfully seeded with full production test data!');

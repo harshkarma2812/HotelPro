@@ -7,13 +7,13 @@ import {
   CalendarCheck,
   Calendar,
   BedDouble,
-  DollarSign,
   AlertCircle,
   CheckCircle2,
   XCircle,
   CreditCard,
   Eye,
-  Trash2
+  Crown,
+  Sparkles
 } from 'lucide-react';
 
 const MyBookings = () => {
@@ -43,7 +43,7 @@ const MyBookings = () => {
   }, []);
 
   const handleCancelBooking = async (bookingId) => {
-    if (!window.confirm('Are you sure you want to cancel this reservation? If payment was made, your refund will be automatically recorded.')) {
+    if (!window.confirm('Are you sure you want to cancel this royal reservation? An instant refund will be automatically recorded.')) {
       return;
     }
 
@@ -54,7 +54,7 @@ const MyBookings = () => {
     try {
       const res = await api.put(`/bookings/${bookingId}/cancel`);
       if (res.data?.success) {
-        setMessage('Reservation cancelled successfully. Any eligible refund has been processed.');
+        setMessage('Reservation cancelled successfully. Eligible refund has been recorded.');
         fetchBookings();
       }
     } catch (err) {
@@ -88,16 +88,21 @@ const MyBookings = () => {
   };
 
   return (
-    <div className="py-5">
+    <div className="py-5" style={{ backgroundColor: '#fcfaf6' }}>
       <div className="container">
         {/* Header */}
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
           <div>
-            <span className="section-tag">Booking History</span>
-            <h1 className="display-6 fw-bold font-serif text-dark mb-1">My Reservations</h1>
-            <p className="text-muted mb-0">View all your past, present, and upcoming luxury stays</p>
+            <div className="d-flex align-items-center gap-2 mb-1">
+              <span className="badge-royal">
+                <Crown size={12} className="me-1" /> शाही आरक्षण सूची
+              </span>
+              <span className="text-muted small">Stay Ledger</span>
+            </div>
+            <h1 className="display-6 fw-bold font-regal text-dark mb-1">My Palace Reservations</h1>
+            <p className="text-muted mb-0">View all your past, present, and upcoming royal stays at HotelPro</p>
           </div>
-          <Link to="/rooms" className="btn btn-gold rounded-3 mt-3 mt-md-0 d-inline-flex align-items-center gap-2">
+          <Link to="/rooms" className="btn btn-maroon rounded-3 mt-3 mt-md-0 d-inline-flex align-items-center gap-2 shadow-sm">
             <BedDouble size={16} /> Explore New Stay
           </Link>
         </div>
@@ -138,7 +143,7 @@ const MyBookings = () => {
 
         {/* Content */}
         {loading ? (
-          <LoadingSpinner text="Fetching your reservations..." />
+          <LoadingSpinner text="Fetching your royal reservations..." />
         ) : filteredBookings.length === 0 ? (
           <EmptyState
             title="No Bookings in This Category"
@@ -149,7 +154,7 @@ const MyBookings = () => {
         ) : (
           <div className="d-flex flex-column gap-4">
             {filteredBookings.map((booking) => (
-              <div key={booking._id} className="card luxury-card p-4 border-0">
+              <div key={booking._id} className="card luxury-card p-4 border-0 shadow-sm" style={{ backgroundColor: '#ffffff' }}>
                 <div className="row g-4 align-items-center">
                   {/* Room Thumbnail */}
                   <div className="col-12 col-md-3">
@@ -164,15 +169,15 @@ const MyBookings = () => {
                   {/* Room & Stay Details */}
                   <div className="col-12 col-md-5">
                     <div className="d-flex align-items-center gap-2 mb-1">
-                      <span className="badge badge-gold small">{booking.room?.roomType}</span>
-                      <span className="badge bg-dark text-white small">Room #{booking.room?.roomNumber}</span>
+                      <span className="badge-royal small">{booking.room?.roomType}</span>
+                      <span className="badge bg-dark text-white small">Chamber #{booking.room?.roomNumber}</span>
                       {getStatusBadge(booking.bookingStatus)}
                     </div>
-                    <h4 className="fw-bold font-serif text-dark mb-1">
-                      {booking.room?.roomType} Suite
+                    <h4 className="fw-bold font-regal text-dark mb-1">
+                      {booking.room?.roomType}
                     </h4>
                     <p className="text-muted small mb-2">
-                      Booking Ref: <strong className="font-monospace text-dark">{booking.bookingId}</strong>
+                      Farman Ref: <strong className="font-monospace text-dark">{booking.bookingId}</strong>
                     </p>
 
                     <div className="d-flex flex-wrap gap-3 text-secondary small">
@@ -189,8 +194,10 @@ const MyBookings = () => {
                   {/* Pricing & Actions */}
                   <div className="col-12 col-md-4 text-md-end border-start-md ps-md-4">
                     <div className="mb-3">
-                      <span className="text-muted small">Total Cost</span>
-                      <div className="fs-3 fw-bold text-dark font-serif">${booking.totalAmount}</div>
+                      <span className="text-muted small">Total Tariff (INR)</span>
+                      <div className="fs-3 fw-bold text-dark font-regal" style={{ color: '#6e0d25' }}>
+                        ₹{booking.totalAmount?.toLocaleString('en-IN')}
+                      </div>
                       <div>
                         <span className={`badge ${booking.paymentStatus === 'Paid' ? 'bg-success-subtle text-success' : booking.paymentStatus === 'Refunded' ? 'bg-info-subtle text-info' : 'bg-warning-subtle text-warning'}`}>
                           Payment: {booking.paymentStatus}
@@ -203,13 +210,13 @@ const MyBookings = () => {
                         to={`/bookings/${booking._id}`}
                         className="btn btn-outline-dark btn-sm rounded-3 d-flex align-items-center gap-1 px-3"
                       >
-                        <Eye size={14} /> Voucher & Details
+                        <Eye size={14} /> Farman & Voucher
                       </Link>
 
                       {booking.paymentStatus === 'Pending' && booking.bookingStatus !== 'Cancelled' && (
                         <Link
                           to={`/payment?bookingId=${booking._id}`}
-                          className="btn btn-warning btn-sm rounded-3 d-flex align-items-center gap-1 px-3 fw-bold"
+                          className="btn btn-maroon btn-sm rounded-3 d-flex align-items-center gap-1 px-3 fw-bold"
                         >
                           <CreditCard size={14} /> Pay Now
                         </Link>

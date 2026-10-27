@@ -1,114 +1,155 @@
 :root {
-  --primary-navy: #0f172a;
-  --secondary-navy: #1e293b;
-  --gold-accent: #c5a880;
-  --gold-hover: #b39268;
-  --gold-light: #fbf7f2;
-  --text-dark: #0f172a;
-  --text-muted: #64748b;
-  --bg-light: #f8fafc;
-  --bg-white: #ffffff;
-  --border-color: #e2e8f0;
-  --card-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
-  --card-hover-shadow: 0 20px 35px -5px rgba(15, 23, 42, 0.12), 0 10px 15px -5px rgba(15, 23, 42, 0.08);
-  --font-serif: 'Playfair Display', Georgia, serif;
+  /* Royal Heritage Indian Palette */
+  --royal-maroon: #6e0d25;
+  --royal-burgundy: #4a0818;
+  --royal-indigo: #0a1128;
+  --royal-midnight: #060a17;
+  --royal-gold: #c99a3e;
+  --royal-gold-hover: #b08229;
+  --royal-gold-light: #fcf6ea;
+  --royal-gold-border: rgba(201, 154, 62, 0.4);
+  --royal-emerald: #0f5132;
+  --royal-amber: #d97706;
+  --ivory-white: #fdfcf9;
+  --bg-cream: #faf7f2;
+  --text-dark: #121826;
+  --text-muted: #5f6b7c;
+  --border-color: #ebdcc4;
+  --card-shadow: 0 12px 28px -6px rgba(110, 13, 37, 0.08), 0 6px 12px -4px rgba(10, 17, 40, 0.05);
+  --card-hover-shadow: 0 22px 42px -6px rgba(110, 13, 37, 0.16), 0 12px 20px -6px rgba(201, 154, 62, 0.2);
+  --font-regal: 'Cinzel', serif;
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 
 body {
   font-family: var(--font-sans);
   color: var(--text-dark);
-  background-color: var(--bg-light);
-  line-height: 1.6;
+  background-color: var(--bg-cream);
+  line-height: 1.65;
   overflow-x: hidden;
+  background-image: radial-gradient(rgba(201, 154, 62, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 h1, h2, h3, .font-serif, .navbar-brand, .luxury-heading {
   font-family: var(--font-serif);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
-/* Elegant Buttons */
+.font-regal {
+  font-family: var(--font-regal);
+  letter-spacing: 0.08em;
+}
+
+/* Royal Heritage Buttons */
 .btn-gold {
-  background-color: var(--gold-accent);
-  color: #ffffff;
+  background: linear-gradient(135deg, #d4af37 0%, #b8860b 50%, #996515 100%);
+  color: #ffffff !important;
   font-weight: 600;
   border: none;
-  padding: 0.65rem 1.4rem;
+  padding: 0.65rem 1.5rem;
   border-radius: 8px;
-  transition: all 0.25s ease-in-out;
+  box-shadow: 0 4px 14px rgba(184, 134, 11, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.02em;
 }
 
 .btn-gold:hover, .btn-gold:focus {
-  background-color: var(--gold-hover);
-  color: #ffffff;
+  background: linear-gradient(135deg, #e5c053 0%, #c4941d 50%, #ad761f 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(197, 168, 128, 0.35);
+  box-shadow: 0 8px 22px rgba(184, 134, 11, 0.4);
 }
 
 .btn-outline-gold {
   background-color: transparent;
-  color: var(--gold-accent);
-  border: 1.5px solid var(--gold-accent);
+  color: var(--royal-gold) !important;
+  border: 1.5px solid var(--royal-gold);
   font-weight: 600;
-  padding: 0.6rem 1.35rem;
+  padding: 0.6rem 1.4rem;
   border-radius: 8px;
-  transition: all 0.25s ease-in-out;
+  transition: all 0.3s ease;
 }
 
 .btn-outline-gold:hover {
-  background-color: var(--gold-accent);
-  color: #ffffff;
+  background-color: var(--royal-gold);
+  color: #ffffff !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(197, 168, 128, 0.25);
+  box-shadow: 0 6px 18px rgba(201, 154, 62, 0.3);
+}
+
+.btn-maroon {
+  background: linear-gradient(135deg, var(--royal-maroon) 0%, var(--royal-burgundy) 100%);
+  color: #ffffff !important;
+  font-weight: 600;
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(110, 13, 37, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-maroon:hover {
+  background: linear-gradient(135deg, #85122e 0%, #59091d 100%);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(110, 13, 37, 0.45);
 }
 
 .btn-navy {
-  background-color: var(--primary-navy);
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--royal-indigo) 0%, var(--royal-midnight) 100%);
+  color: #ffffff !important;
   font-weight: 600;
-  border: none;
+  border: 1px solid var(--royal-gold-border);
   padding: 0.65rem 1.4rem;
   border-radius: 8px;
-  transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease;
 }
 
 .btn-navy:hover {
-  background-color: var(--secondary-navy);
-  color: #ffffff;
+  background: #111a38;
+  color: #ffffff !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.25);
+  box-shadow: 0 6px 20px rgba(10, 17, 40, 0.35);
 }
 
-/* Luxury Cards */
+/* Jharokha & Palace Cards */
 .luxury-card {
-  background: var(--bg-white);
+  background: #ffffff;
   border: 1px solid var(--border-color);
-  border-radius: 16px;
+  border-radius: 18px;
   box-shadow: var(--card-shadow);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+  position: relative;
 }
 
 .luxury-card:hover {
   box-shadow: var(--card-hover-shadow);
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  border-color: var(--royal-gold);
+}
+
+/* Jharokha Arch Effect on Tops */
+.jharokha-top {
+  border-top: 4px solid var(--royal-gold);
 }
 
 /* Glassmorphism Header */
 .glass-nav {
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  background: rgba(253, 252, 249, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 2px solid rgba(201, 154, 62, 0.35);
+  box-shadow: 0 4px 20px rgba(10, 17, 40, 0.05);
   transition: all 0.3s ease;
 }
 
-/* Hero Section */
+/* Royal Palace Hero Section */
 .hero-wrapper {
   position: relative;
-  min-height: 85vh;
+  min-height: 88vh;
   display: flex;
   align-items: center;
   background-size: cover;
@@ -122,31 +163,57 @@ h1, h2, h3, .font-serif, .navbar-brand, .luxury-heading {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.72) 0%, rgba(15, 23, 42, 0.88) 100%);
+  background: linear-gradient(180deg, rgba(10, 17, 40, 0.72) 0%, rgba(74, 8, 24, 0.75) 50%, rgba(6, 10, 23, 0.92) 100%);
 }
 
 .hero-search-card {
   background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-  padding: 1.75rem;
+  border-radius: 20px;
+  border: 1.5px solid var(--royal-gold-border);
+  box-shadow: 0 25px 50px -12px rgba(10, 17, 40, 0.35);
+  padding: 2rem;
   margin-top: 2rem;
+  position: relative;
+}
+
+.hero-search-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--royal-gold), transparent);
 }
 
 /* Badges */
 .badge-gold {
-  background-color: var(--gold-light);
-  color: #8c6d3b;
-  border: 1px solid rgba(197, 168, 128, 0.3);
+  background-color: var(--royal-gold-light);
+  color: #8c6317;
+  border: 1px solid rgba(201, 154, 62, 0.45);
   font-weight: 600;
-  padding: 0.35rem 0.75rem;
+  padding: 0.35rem 0.85rem;
   border-radius: 30px;
+  letter-spacing: 0.03em;
+}
+
+.badge-royal {
+  background: linear-gradient(135deg, var(--royal-maroon), var(--royal-burgundy));
+  color: #f7e7ce;
+  border: 1px solid var(--royal-gold);
+  font-weight: 700;
+  padding: 0.35rem 0.9rem;
+  border-radius: 30px;
+  letter-spacing: 0.05em;
+  font-family: var(--font-regal);
+  font-size: 0.75rem;
 }
 
 .badge-available {
   background-color: #ecfdf5;
-  color: #059669;
-  border: 1px solid #a7f3d0;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
   font-weight: 600;
   padding: 0.35rem 0.75rem;
   border-radius: 30px;
@@ -154,8 +221,8 @@ h1, h2, h3, .font-serif, .navbar-brand, .luxury-heading {
 
 .badge-occupied {
   background-color: #fef2f2;
-  color: #dc2626;
-  border: 1px solid #fecaca;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
   font-weight: 600;
   padding: 0.35rem 0.75rem;
   border-radius: 30px;
@@ -163,8 +230,8 @@ h1, h2, h3, .font-serif, .navbar-brand, .luxury-heading {
 
 .badge-maintenance {
   background-color: #fffbeb;
-  color: #d97706;
-  border: 1px solid #fde68a;
+  color: #92400e;
+  border: 1px solid #fcd34d;
   font-weight: 600;
   padding: 0.35rem 0.75rem;
   border-radius: 30px;
@@ -172,77 +239,81 @@ h1, h2, h3, .font-serif, .navbar-brand, .luxury-heading {
 
 /* Admin Sidebar */
 .admin-sidebar {
-  width: 260px;
+  width: 270px;
   min-height: calc(100vh - 72px);
-  background-color: var(--primary-navy);
-  color: #e2e8f0;
+  background: linear-gradient(180deg, var(--royal-indigo) 0%, var(--royal-midnight) 100%);
+  color: #f1f5f9;
   display: flex;
   flex-direction: column;
+  border-right: 2px solid var(--royal-gold-border);
 }
 
 .admin-nav-link {
-  color: #94a3b8;
+  color: #b0bed5;
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.75rem 1.25rem;
+  padding: 0.8rem 1.25rem;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 500;
   transition: all 0.2s ease;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.3rem;
 }
 
 .admin-nav-link:hover, .admin-nav-link.active {
   color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(201, 154, 62, 0.15);
+  border-left: 3px solid var(--royal-gold);
 }
 
 .admin-nav-link.active {
-  background-color: var(--gold-accent);
-  color: #ffffff;
+  background: linear-gradient(90deg, rgba(201, 154, 62, 0.3) 0%, rgba(201, 154, 62, 0.08) 100%);
+  color: #fef3c7;
   font-weight: 600;
 }
 
 /* Form Controls */
 .form-control:focus, .form-select:focus {
-  border-color: var(--gold-accent);
-  box-shadow: 0 0 0 0.25rem rgba(197, 168, 128, 0.2);
+  border-color: var(--royal-gold);
+  box-shadow: 0 0 0 0.25rem rgba(201, 154, 62, 0.25);
 }
 
 /* Section styling */
 .section-tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--gold-accent);
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--royal-maroon);
+  font-family: var(--font-regal);
+  margin-bottom: 0.6rem;
 }
 
-/* Room image carousel / gallery */
+.section-tag::before, .section-tag::after {
+  content: '✦';
+  color: var(--royal-gold);
+  font-size: 0.65rem;
+}
+
+/* Room image gallery */
 .room-gallery-img {
   width: 100%;
-  height: 240px;
+  height: 250px;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .luxury-card:hover .room-gallery-img {
-  transform: scale(1.04);
-}
-
-.room-detail-hero-img {
-  width: 100%;
-  height: 440px;
-  object-fit: cover;
-  border-radius: 16px;
+  transform: scale(1.05);
 }
 
 /* Star rating */
 .star-rating {
-  color: #f59e0b;
+  color: #eab308;
 }
 
 /* Amenity pill */
@@ -250,70 +321,55 @@ h1, h2, h3, .font-serif, .navbar-brand, .luxury-heading {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.35rem 0.8rem;
-  background-color: #f1f5f9;
-  border-radius: 6px;
+  padding: 0.4rem 0.85rem;
+  background-color: var(--royal-gold-light);
+  border: 1px solid rgba(201, 154, 62, 0.25);
+  border-radius: 8px;
   font-size: 0.85rem;
-  color: var(--text-dark);
-  font-weight: 500;
+  color: var(--royal-burgundy);
+  font-weight: 600;
 }
 
 /* Stat card in dashboard */
 .stat-card {
   background: #ffffff;
   border: 1px solid var(--border-color);
-  border-radius: 14px;
-  padding: 1.5rem;
+  border-radius: 16px;
+  padding: 1.6rem;
   box-shadow: var(--card-shadow);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-left: 4px solid var(--royal-gold);
 }
 
 .stat-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Table styling */
-.table-luxury {
-  border-collapse: separate;
-  border-spacing: 0 0.5rem;
-}
-
-.table-luxury th {
-  background: transparent;
-  color: var(--text-muted);
-  font-weight: 600;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border: none;
-  padding: 0.75rem 1rem;
-}
-
-.table-luxury td {
+/* Shahi Farman Voucher / Print */
+.shahi-farman-card {
   background: #ffffff;
-  vertical-align: middle;
-  padding: 1rem;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
+  border: 3px double var(--royal-gold);
+  border-radius: 16px;
+  position: relative;
 }
 
-.table-luxury tr td:first-child {
-  border-left: 1px solid var(--border-color);
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-
-.table-luxury tr td:last-child {
-  border-right: 1px solid var(--border-color);
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+.shahi-farman-card::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px dashed rgba(201, 154, 62, 0.4);
+  pointer-events: none;
+  border-radius: 12px;
 }
 
 /* Print Invoice styles */

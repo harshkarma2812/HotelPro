@@ -13,13 +13,11 @@ import {
   ShieldCheck,
   Check,
   ArrowLeft,
-  Coffee,
-  Tv,
-  Wifi,
-  Waves,
-  Car,
-  Utensils,
-  AlertCircle
+  Crown,
+  Sparkles,
+  AlertCircle,
+  MapPin,
+  Clock
 } from 'lucide-react';
 
 const RoomDetails = () => {
@@ -79,7 +77,7 @@ const RoomDetails = () => {
 
   const nights = calculateNights(bookingForm.checkIn, bookingForm.checkOut);
   const subtotal = (room?.price || 0) * nights;
-  const taxes = Math.round(subtotal * 0.1);
+  const taxes = Math.round(subtotal * 0.12); // 12% Heritage Luxury GST
   const grandTotal = subtotal + taxes;
 
   const handleInputChange = (e) => {
@@ -106,7 +104,7 @@ const RoomDetails = () => {
     }
 
     if (Number(bookingForm.guests) > room.capacity) {
-      setBookingError(`Maximum capacity for this room is ${room.capacity} guests.`);
+      setBookingError(`Maximum royal capacity for this chamber is ${room.capacity} guests.`);
       return;
     }
 
@@ -130,24 +128,24 @@ const RoomDetails = () => {
         navigate(`/payment?bookingId=${newBooking._id}`);
       }
     } catch (err) {
-      setBookingError(err.message || 'Failed to initialize booking');
+      setBookingError(err.message || 'Failed to initialize palace booking');
     } finally {
       setBookingLoading(false);
     }
   };
 
   if (loading) {
-    return <LoadingSpinner text="Fetching room specifications..." fullScreen={false} />;
+    return <LoadingSpinner text="Fetching royal suite specifications..." fullScreen={false} />;
   }
 
   if (error || !room) {
     return (
       <div className="container py-5 text-center">
         <div className="alert alert-danger p-4 rounded-3 d-inline-block">
-          <h4>Room Not Found</h4>
-          <p>{error || 'The requested room could not be loaded.'}</p>
+          <h4>Chamber Not Found</h4>
+          <p>{error || 'The requested palace suite could not be loaded.'}</p>
           <Link to="/rooms" className="btn btn-outline-danger mt-2">
-            Back to All Rooms
+            Back to Palace Suites
           </Link>
         </div>
       </div>
@@ -155,12 +153,12 @@ const RoomDetails = () => {
   }
 
   return (
-    <div className="py-5">
+    <div className="py-5" style={{ backgroundColor: '#fcfaf6' }}>
       <div className="container">
         {/* Navigation Breadcrumb */}
         <div className="mb-4">
           <Link to="/rooms" className="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1 rounded-pill px-3">
-            <ArrowLeft size={16} /> Back to Rooms
+            <ArrowLeft size={16} /> Back to Palace Chambers
           </Link>
         </div>
 
@@ -168,23 +166,27 @@ const RoomDetails = () => {
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
           <div>
             <div className="d-flex align-items-center gap-2 mb-2">
-              <span className="badge badge-gold">{room.roomType}</span>
-              <span className="badge bg-dark text-white">Room #{room.roomNumber}</span>
+              <span className="badge-royal">
+                <Crown size={12} className="me-1" /> {room.roomType}
+              </span>
+              <span className="badge bg-dark text-white">Chamber #{room.roomNumber}</span>
               <span className="d-flex align-items-center gap-1 text-warning fw-bold small ms-2">
-                <Star size={16} className="fill-warning text-warning" /> {room.rating || 4.8} / 5.0 (124 reviews)
+                <Star size={16} className="fill-warning text-warning" /> {room.rating || 4.9} / 5.0 (Royal Reviews)
               </span>
             </div>
-            <h1 className="display-5 fw-bold text-dark font-serif mb-1">
-              {room.roomType} Suite
+            <h1 className="display-5 fw-bold text-dark font-regal mb-1">
+              {room.roomType}
             </h1>
-            <p className="text-muted mb-0">Floor {room.floor || 1} • Waterfront Marina Wing</p>
+            <p className="text-muted mb-0">Floor {room.floor || 1} • Lake Pichola Waterfront Heritage Wing</p>
           </div>
 
           <div className="mt-3 mt-md-0 text-md-end">
-            <div className="text-muted small">Standard Rate</div>
+            <div className="text-muted small">Royal Palace Tariff</div>
             <div className="d-flex align-items-baseline gap-1 justify-content-md-end">
-              <span className="display-6 fw-bold text-dark font-serif">${room.price}</span>
-              <span className="text-muted">/ night</span>
+              <span className="display-6 fw-bold text-dark font-regal" style={{ color: '#6e0d25' }}>
+                ₹{room.price?.toLocaleString('en-IN')}
+              </span>
+              <span className="text-muted">/ night + GST</span>
             </div>
           </div>
         </div>
@@ -199,6 +201,9 @@ const RoomDetails = () => {
                 className="w-100 h-100"
                 style={{ objectFit: 'cover' }}
               />
+              <div className="position-absolute bottom-0 start-0 m-3 badge bg-dark bg-opacity-75 text-white px-3 py-2 rounded-pill">
+                Heritage Jharokha View • Hand-Painted Frescoes
+              </div>
             </div>
           </div>
           <div className="col-12 col-lg-4 d-flex flex-column gap-3 justify-content-between">
@@ -206,7 +211,7 @@ const RoomDetails = () => {
               <div
                 key={idx}
                 onClick={() => setSelectedImage(idx)}
-                className={`rounded-3 overflow-hidden border ${selectedImage === idx ? 'border-warning border-3' : 'opacity-75'} cursor-pointer`}
+                className={`rounded-3 overflow-hidden border ${selectedImage === idx ? 'border-warning border-3 shadow' : 'opacity-75'} cursor-pointer`}
                 style={{ height: '140px', cursor: 'pointer' }}
               >
                 <img src={img} alt="Thumbnail" className="w-100 h-100" style={{ objectFit: 'cover' }} />
@@ -220,45 +225,45 @@ const RoomDetails = () => {
           {/* LEFT: Room Specifications */}
           <div className="col-12 col-lg-7 col-xl-8">
             {/* Quick Specs Badges */}
-            <div className="card luxury-card p-4 mb-4 border-0">
+            <div className="card luxury-card p-4 mb-4 border-0 shadow-sm" style={{ backgroundColor: '#ffffff' }}>
               <div className="row g-3 text-center">
                 <div className="col-4 border-end">
-                  <Users size={24} className="text-warning mb-1" />
-                  <div className="text-muted small">Capacity</div>
+                  <Users size={24} style={{ color: '#c99a3e' }} className="mb-1" />
+                  <div className="text-muted small">Guest Capacity</div>
                   <div className="fw-bold text-dark">{room.capacity} Guests Max</div>
                 </div>
                 <div className="col-4 border-end">
-                  <BedDouble size={24} className="text-warning mb-1" />
+                  <BedDouble size={24} style={{ color: '#c99a3e' }} className="mb-1" />
                   <div className="text-muted small">Bedding</div>
-                  <div className="fw-bold text-dark">{room.bedType} Bed</div>
+                  <div className="fw-bold text-dark">{room.bedType}</div>
                 </div>
                 <div className="col-4">
-                  <Maximize2 size={24} className="text-warning mb-1" />
-                  <div className="text-muted small">Room Size</div>
-                  <div className="fw-bold text-dark">{room.size || 350} sq ft</div>
+                  <Maximize2 size={24} style={{ color: '#c99a3e' }} className="mb-1" />
+                  <div className="text-muted small">Palace Area</div>
+                  <div className="fw-bold text-dark">{room.size || 550} sq ft</div>
                 </div>
               </div>
             </div>
 
             {/* Description */}
             <div className="mb-5">
-              <h4 className="fw-bold font-serif text-dark mb-3">Room Overview</h4>
+              <h4 className="fw-bold font-regal text-dark mb-3">Chamber Overview</h4>
               <p className="text-secondary leading-relaxed fs-6">
                 {room.description}
               </p>
               <p className="text-secondary leading-relaxed">
-                Experience high-thread-count Egyptian cotton linens, a customized pillow menu, Italian marble en-suite bathroom with rainfall shower, and complimentary Nespresso coffee machine. Every space is acoustically optimized for supreme quiet and deep rest.
+                Adorned with gold-leaf inlay ceiling work, authentic Tikri mirror art, hand-woven silk draperies, and royal teakwood furnishings. Guests enjoy personalized Khidmatgar (royal butler) assistance, customized Ayurvedic wellness bath oils, and private evening tea served in your lakeside Jharokha.
               </p>
             </div>
 
             {/* Amenities Checklist */}
             <div className="mb-5">
-              <h4 className="fw-bold font-serif text-dark mb-3">Included Amenities & Services</h4>
+              <h4 className="fw-bold font-regal text-dark mb-3">Royal Heritage Amenities & Khidmatgar Services</h4>
               <div className="row g-3">
                 {room.amenities?.map((amenity, idx) => (
                   <div key={idx} className="col-6 col-sm-4">
-                    <div className="d-flex align-items-center gap-2 p-3 bg-light rounded-3 border">
-                      <Check size={18} className="text-success flex-shrink-0" />
+                    <div className="d-flex align-items-center gap-2 p-3 bg-white rounded-3 border shadow-sm">
+                      <Sparkles size={18} className="text-warning flex-shrink-0" />
                       <span className="small fw-semibold text-dark">{amenity}</span>
                     </div>
                   </div>
@@ -267,24 +272,26 @@ const RoomDetails = () => {
             </div>
 
             {/* Hotel Policies */}
-            <div className="card p-4 bg-light rounded-4 border">
-              <h5 className="fw-bold font-serif text-dark mb-3">Stay Policies & Concierge Guidance</h5>
+            <div className="card p-4 rounded-4 border shadow-sm" style={{ backgroundColor: '#fffdfa', borderColor: '#e8dec8' }}>
+              <h5 className="fw-bold font-regal text-dark mb-3">
+                <Crown size={18} className="me-2 text-warning" /> Royal Protocol & Stay Guidance
+              </h5>
               <div className="row g-3 small text-secondary">
                 <div className="col-sm-6">
-                  <strong className="text-dark d-block">Check-in:</strong>
-                  From 3:00 PM (Early check-in subject to availability)
+                  <strong className="text-dark d-block">Royal Check-in:</strong>
+                  From 2:00 PM with traditional Rajasthani Aarti, Tilak & Garland welcome ceremony.
                 </div>
                 <div className="col-sm-6">
                   <strong className="text-dark d-block">Check-out:</strong>
-                  Until 11:00 AM (Late checkout until 2:00 PM on request)
+                  Until 12:00 Noon (Late departure until 3:00 PM available complimentary on request).
                 </div>
                 <div className="col-sm-6">
-                  <strong className="text-dark d-block">Cancellation:</strong>
-                  Free cancellation up to 48 hours prior to check-in.
+                  <strong className="text-dark d-block">Cancellation Farman:</strong>
+                  100% free cancellation up to 48 hours prior to arrival with instant refund.
                 </div>
                 <div className="col-sm-6">
-                  <strong className="text-dark d-block">Smoke-Free:</strong>
-                  100% non-smoking property in all suites and public areas.
+                  <strong className="text-dark d-block">Dining & Shahi Dawat:</strong>
+                  Complimentary Royal Breakfast buffet at the Lake Terrace with live sitar music.
                 </div>
               </div>
             </div>
@@ -292,13 +299,13 @@ const RoomDetails = () => {
 
           {/* RIGHT: Booking Reservation Widget */}
           <div className="col-12 col-lg-5 col-xl-4">
-            <div className="card luxury-card p-4 sticky-top shadow-lg" style={{ top: '100px' }}>
+            <div className="card luxury-card p-4 sticky-top shadow-lg" style={{ top: '100px', borderColor: '#c99a3e' }}>
               <div className="d-flex align-items-center justify-content-between mb-3 pb-3 border-bottom">
                 <div>
-                  <span className="text-muted small">Reservation</span>
-                  <h4 className="fw-bold text-dark font-serif mb-0">Book This Room</h4>
+                  <span className="text-muted small">शाही आरक्षण</span>
+                  <h4 className="fw-bold text-dark font-regal mb-0">Reserve Chamber</h4>
                 </div>
-                <span className="badge badge-available">Instant Booking</span>
+                <span className="badge-royal">Instant Farman</span>
               </div>
 
               {bookingError && (
@@ -339,7 +346,7 @@ const RoomDetails = () => {
 
                 {/* Guests */}
                 <div className="mb-3">
-                  <label className="form-label small fw-bold text-muted mb-1">Number of Guests</label>
+                  <label className="form-label small fw-bold text-muted mb-1">Royal Guests</label>
                   <select
                     name="guests"
                     className="form-select form-select-sm rounded-3"
@@ -356,12 +363,12 @@ const RoomDetails = () => {
 
                 {/* Guest Details */}
                 <div className="mb-2">
-                  <label className="form-label small fw-bold text-muted mb-1">Guest Full Name</label>
+                  <label className="form-label small fw-bold text-muted mb-1">Primary Guest Full Name</label>
                   <input
                     type="text"
                     name="guestName"
                     className="form-control form-control-sm rounded-3"
-                    placeholder="e.g. Sarah Jenkins"
+                    placeholder="e.g. Princess Gayatri Devi"
                     value={bookingForm.guestName}
                     onChange={handleInputChange}
                     required
@@ -382,12 +389,12 @@ const RoomDetails = () => {
                     />
                   </div>
                   <div className="col-6">
-                    <label className="form-label small fw-bold text-muted mb-1">Phone</label>
+                    <label className="form-label small fw-bold text-muted mb-1">Mobile / WhatsApp</label>
                     <input
                       type="tel"
                       name="guestPhone"
                       className="form-control form-control-sm rounded-3"
-                      placeholder="+1 (555) 000-0000"
+                      placeholder="+91 98765 43210"
                       value={bookingForm.guestPhone}
                       onChange={handleInputChange}
                       required
@@ -396,31 +403,31 @@ const RoomDetails = () => {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label small fw-bold text-muted mb-1">Special Requests (Optional)</label>
+                  <label className="form-label small fw-bold text-muted mb-1">Special Royal Requests (Optional)</label>
                   <textarea
                     name="specialRequests"
                     rows="2"
                     className="form-control form-control-sm rounded-3"
-                    placeholder="e.g. Quiet room, late arrival, honeymoon setup..."
+                    placeholder="e.g. Lake view jharokha, vintage car transfer, wedding anniversary setup..."
                     value={bookingForm.specialRequests}
                     onChange={handleInputChange}
                   />
                 </div>
 
                 {/* Price Breakdown */}
-                <div className="bg-light p-3 rounded-3 mb-3 small">
+                <div className="bg-light p-3 rounded-3 mb-3 small border">
                   <div className="d-flex justify-content-between mb-1 text-muted">
-                    <span>${room.price} x {nights} {nights === 1 ? 'night' : 'nights'}</span>
-                    <span className="fw-medium text-dark">${subtotal}</span>
+                    <span>₹{room.price?.toLocaleString('en-IN')} x {nights} {nights === 1 ? 'night' : 'nights'}</span>
+                    <span className="fw-medium text-dark">₹{subtotal.toLocaleString('en-IN')}</span>
                   </div>
                   <div className="d-flex justify-content-between mb-1 text-muted">
-                    <span>Hospitality Tax & Service (10%)</span>
-                    <span className="fw-medium text-dark">${taxes}</span>
+                    <span>Palace Heritage GST & Seva Fee (12%)</span>
+                    <span className="fw-medium text-dark">₹{taxes.toLocaleString('en-IN')}</span>
                   </div>
                   <hr className="my-2" />
-                  <div className="d-flex justify-content-between fs-6 fw-bold text-dark font-serif">
-                    <span>Total Amount</span>
-                    <span className="text-warning">${grandTotal}</span>
+                  <div className="d-flex justify-content-between fs-6 fw-bold text-dark font-regal">
+                    <span>Grand Total (INR)</span>
+                    <span style={{ color: '#6e0d25' }}>₹{grandTotal.toLocaleString('en-IN')}</span>
                   </div>
                 </div>
 
@@ -428,14 +435,14 @@ const RoomDetails = () => {
                 <button
                   type="submit"
                   disabled={bookingLoading || room.status !== 'Available'}
-                  className="btn btn-gold w-100 py-3 fw-bold rounded-3 shadow-sm d-flex align-items-center justify-content-center gap-2"
+                  className="btn btn-maroon w-100 py-3 fw-bold rounded-3 shadow-sm d-flex align-items-center justify-content-center gap-2"
                 >
                   {bookingLoading ? (
-                    <span>Reserving Room...</span>
+                    <span>Issuing Royal Farman...</span>
                   ) : room.status !== 'Available' ? (
-                    <span>Room Unavailable ({room.status})</span>
+                    <span>Chamber Unavailable ({room.status})</span>
                   ) : (
-                    <span>Proceed to Payment</span>
+                    <span>Proceed to Royal Payment</span>
                   )}
                 </button>
               </form>
@@ -443,7 +450,7 @@ const RoomDetails = () => {
               <div className="text-center mt-3">
                 <span className="small text-muted d-flex align-items-center justify-content-center gap-1">
                   <ShieldCheck size={14} className="text-success" />
-                  Safe & Secure Mock Demo Checkout
+                  Secure RuPay & UPI Demo Gateway
                 </span>
               </div>
             </div>

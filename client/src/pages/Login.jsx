@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Building2, Mail, Lock, ShieldCheck, User, ArrowRight, AlertCircle } from 'lucide-react';
+import { Mail, Lock, ShieldCheck, User, ArrowRight, AlertCircle, Crown, Sparkles } from 'lucide-react';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const Login = () => {
   const fillDemo = (role) => {
     if (role === 'guest') {
       setFormData({
-        email: 'sarah.jenkins@example.com',
+        email: 'princess.gayatri@mewarheritage.in',
         password: 'GuestPassword@123'
       });
     } else if (role === 'admin') {
@@ -59,28 +59,31 @@ const Login = () => {
   };
 
   return (
-    <div className="py-5" style={{ minHeight: '80vh' }}>
+    <div className="py-5" style={{ minHeight: '80vh', backgroundColor: '#fcfaf6' }}>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-12 col-md-8 col-lg-5">
-            <div className="card luxury-card p-4 p-md-5 border-0 shadow-lg">
+            <div className="card luxury-card p-4 p-md-5 border-0 shadow-lg" style={{ backgroundColor: '#ffffff', borderColor: '#e8dec8' }}>
               {/* Header */}
               <div className="text-center mb-4">
                 <div
-                  className="bg-dark text-warning p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm"
-                  style={{ width: '56px', height: '56px' }}
+                  className="rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow"
+                  style={{ width: '64px', height: '64px', backgroundColor: '#6e0d25', color: '#c99a3e', border: '2px solid #c99a3e' }}
                 >
-                  <Building2 size={28} />
+                  <Crown size={32} />
                 </div>
-                <h3 className="fw-bold font-serif text-dark mb-1">Welcome to HotelPro</h3>
-                <p className="text-muted small">Sign in to manage your reservations and profile</p>
+                <div className="badge-royal mb-2">
+                  <Sparkles size={12} className="me-1" /> शाही प्रवेश
+                </div>
+                <h3 className="fw-bold font-regal text-dark mb-1">Welcome to HotelPro</h3>
+                <p className="text-muted small">Sign in to manage your palace reservations and royal profile</p>
               </div>
 
               {/* Expired Session Notice */}
               {isExpired && (
                 <div className="alert alert-warning py-2 px-3 small d-flex align-items-center gap-2 mb-3">
                   <AlertCircle size={16} />
-                  <span>Your session has expired. Please log in again.</span>
+                  <span>Your royal session has expired. Please sign in again.</span>
                 </div>
               )}
 
@@ -95,8 +98,8 @@ const Login = () => {
               {/* Quick Demo Login Credentials Bar */}
               <div className="bg-light border rounded-3 p-3 mb-4">
                 <div className="d-flex align-items-center justify-content-between mb-2">
-                  <span className="small fw-bold text-dark">Demo One-Click Login</span>
-                  <span className="badge bg-secondary-subtle text-secondary small">Evaluator Ready</span>
+                  <span className="small fw-bold text-dark font-regal">1-Click Demo Login</span>
+                  <span className="badge badge-gold small">Instant Auth</span>
                 </div>
                 <div className="d-flex gap-2">
                   <button
@@ -104,14 +107,14 @@ const Login = () => {
                     onClick={() => fillDemo('guest')}
                     className="btn btn-sm btn-outline-dark w-50 d-flex align-items-center justify-content-center gap-1"
                   >
-                    <User size={14} /> Guest Demo
+                    <User size={14} /> Royal Guest Demo
                   </button>
                   <button
                     type="button"
                     onClick={() => fillDemo('admin')}
-                    className="btn btn-sm btn-outline-warning text-dark w-50 d-flex align-items-center justify-content-center gap-1"
+                    className="btn btn-sm btn-maroon w-50 d-flex align-items-center justify-content-center gap-1"
                   >
-                    <ShieldCheck size={14} className="text-warning" /> Admin Demo
+                    <ShieldCheck size={14} /> Palace Admin Demo
                   </button>
                 </div>
               </div>
@@ -162,11 +165,11 @@ const Login = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="btn btn-gold w-100 py-3 fw-bold rounded-3 shadow-sm d-flex align-items-center justify-content-center gap-2"
+                  className="btn btn-maroon w-100 py-3 fw-bold rounded-3 shadow-sm d-flex align-items-center justify-content-center gap-2"
                 >
                   {loading ? 'Authenticating...' : (
                     <>
-                      <span>Sign In</span> <ArrowRight size={16} />
+                      <span>Sign In to Palace</span> <ArrowRight size={16} />
                     </>
                   )}
                 </button>
@@ -174,9 +177,9 @@ const Login = () => {
 
               {/* Footer text */}
               <div className="text-center mt-4 pt-3 border-top">
-                <span className="text-muted small">Don't have an account yet? </span>
-                <Link to="/register" className="small fw-bold text-warning text-decoration-none">
-                  Create Account
+                <span className="text-muted small">New to HotelPro Royal Heritage? </span>
+                <Link to="/register" className="small fw-bold text-decoration-none" style={{ color: '#6e0d25' }}>
+                  Register as Honored Guest
                 </Link>
               </div>
             </div>

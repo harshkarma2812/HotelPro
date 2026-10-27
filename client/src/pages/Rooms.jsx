@@ -5,7 +5,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import EmptyState from '../components/EmptyState';
 import api from '../services/api';
 import { useBooking } from '../context/BookingContext';
-import { Filter, SlidersHorizontal, Calendar, Users, RotateCcw, BedDouble } from 'lucide-react';
+import { Filter, SlidersHorizontal, Calendar, Users, RotateCcw, BedDouble, Crown, Sparkles } from 'lucide-react';
 
 const Rooms = () => {
   const [searchParamsUrl, setSearchParamsUrl] = useSearchParams();
@@ -15,14 +15,14 @@ const Rooms = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Filters state
+  // Filters state with INR price range (₹5,000 to ₹60,000)
   const [filters, setFilters] = useState({
     checkIn: searchParamsUrl.get('checkIn') || searchParams.checkIn,
     checkOut: searchParamsUrl.get('checkOut') || searchParams.checkOut,
     guests: searchParamsUrl.get('guests') || searchParams.guests || 2,
     roomType: searchParamsUrl.get('roomType') || searchParams.roomType || 'All',
     bedType: 'All',
-    maxPrice: 600,
+    maxPrice: 60000,
     sort: 'price_asc'
   });
 
@@ -73,7 +73,7 @@ const Rooms = () => {
         setRooms(fetchedRooms);
       }
     } catch (err) {
-      setError(err.message || 'Failed to load available rooms');
+      setError(err.message || 'Failed to load available palace suites');
     } finally {
       setLoading(false);
     }
@@ -101,7 +101,7 @@ const Rooms = () => {
       guests: 2,
       roomType: 'All',
       bedType: 'All',
-      maxPrice: 600,
+      maxPrice: 60000,
       sort: 'price_asc'
     };
     setFilters(reset);
@@ -109,36 +109,43 @@ const Rooms = () => {
   };
 
   return (
-    <div className="py-5">
+    <div className="py-5" style={{ backgroundColor: '#fcfaf6' }}>
       <div className="container">
         {/* Header */}
-        <div className="mb-4">
-          <span className="section-tag">Explore Accommodations</span>
-          <h1 className="display-5 fw-bold text-dark font-serif mb-2">Rooms & Luxury Suites</h1>
-          <p className="text-muted">
-            All rooms feature verified date overlap availability, luxury appointments, and personalized butler service.
+        <div className="mb-4 text-center text-md-start">
+          <div className="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-2">
+            <span className="badge-royal">
+              <Crown size={12} className="me-1" /> शाही महल आवास
+            </span>
+            <span className="text-muted small fst-italic">Royal Palace Quarters</span>
+          </div>
+          <h1 className="display-5 fw-bold text-dark font-regal mb-2">
+            Suites & Heritage Chambers
+          </h1>
+          <p className="text-muted mx-auto mx-md-0" style={{ maxWidth: '780px' }}>
+            Experience the royal grandeur of Udaipur & Rajputana. Every suite features verified live date-overlap availability, ornate hand-carved jharokhas, 24/7 royal butler (khidmatgar) service, and breathtaking lake vistas.
           </p>
         </div>
 
         {/* Filter Bar */}
-        <div className="card luxury-card p-4 mb-4 border-0">
+        <div className="card luxury-card p-4 mb-4 border-0 shadow-sm" style={{ backgroundColor: '#ffffff' }}>
           <div className="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
-            <div className="d-flex align-items-center gap-2 fw-bold text-dark">
-              <SlidersHorizontal size={18} className="text-warning" />
-              <span>Real-Time Availability & Filters</span>
+            <div className="d-flex align-items-center gap-2 fw-bold text-dark font-regal">
+              <SlidersHorizontal size={18} style={{ color: '#c99a3e' }} />
+              <span>Palace Availability & Filters</span>
             </div>
             <button
               onClick={handleResetFilters}
               className="btn btn-sm btn-link text-muted text-decoration-none d-flex align-items-center gap-1"
             >
-              <RotateCcw size={14} /> Reset
+              <RotateCcw size={14} /> Reset Filters
             </button>
           </div>
 
           <div className="row g-3 align-items-end">
             {/* Check-In */}
             <div className="col-12 col-sm-6 col-lg-2">
-              <label className="form-label small fw-bold text-muted mb-1">Check-in</label>
+              <label className="form-label small fw-bold text-muted mb-1">Check-in Date</label>
               <input
                 type="date"
                 name="checkIn"
@@ -150,7 +157,7 @@ const Rooms = () => {
 
             {/* Check-Out */}
             <div className="col-12 col-sm-6 col-lg-2">
-              <label className="form-label small fw-bold text-muted mb-1">Check-out</label>
+              <label className="form-label small fw-bold text-muted mb-1">Check-out Date</label>
               <input
                 type="date"
                 name="checkOut"
@@ -180,25 +187,25 @@ const Rooms = () => {
 
             {/* Category */}
             <div className="col-6 col-sm-4 col-lg-2">
-              <label className="form-label small fw-bold text-muted mb-1">Room Category</label>
+              <label className="form-label small fw-bold text-muted mb-1">Palace Suite Category</label>
               <select
                 name="roomType"
                 className="form-select rounded-3"
                 value={filters.roomType}
                 onChange={handleFilterChange}
               >
-                <option value="All">All Categories</option>
-                <option value="Standard Room">Standard Room</option>
-                <option value="Deluxe Room">Deluxe Room</option>
-                <option value="Executive Room">Executive Room</option>
-                <option value="Suite">Royal Suite</option>
-                <option value="Family Room">Family Room</option>
+                <option value="All">All Royal Quarters</option>
+                <option value="Maharaja Presidential Suite">Maharaja Presidential Suite</option>
+                <option value="Maharani Royal Suite">Maharani Royal Suite</option>
+                <option value="Yuvraj Heritage Suite">Yuvraj Heritage Suite</option>
+                <option value="Rajputana Deluxe Room">Rajputana Deluxe Room</option>
+                <option value="Haveli Courtyard Room">Haveli Courtyard Room</option>
               </select>
             </div>
 
             {/* Bed Type */}
             <div className="col-6 col-sm-4 col-lg-2">
-              <label className="form-label small fw-bold text-muted mb-1">Bed Type</label>
+              <label className="form-label small fw-bold text-muted mb-1">Bed Configuration</label>
               <select
                 name="bedType"
                 className="form-select rounded-3"
@@ -206,40 +213,41 @@ const Rooms = () => {
                 onChange={handleFilterChange}
               >
                 <option value="All">All Bed Types</option>
-                <option value="Single">Single</option>
-                <option value="Double">Double</option>
-                <option value="Queen">Queen</option>
-                <option value="King">King</option>
-                <option value="Twin">Twin</option>
+                <option value="Royal Four-Poster King">Royal Four-Poster King</option>
+                <option value="King">King Bed</option>
+                <option value="Queen">Queen Bed</option>
+                <option value="Twin">Twin Beds</option>
               </select>
             </div>
 
             {/* Sort */}
             <div className="col-6 col-sm-6 col-lg-2">
-              <label className="form-label small fw-bold text-muted mb-1">Sort By</label>
+              <label className="form-label small fw-bold text-muted mb-1">Sort Tariff By</label>
               <select
                 name="sort"
                 className="form-select rounded-3"
                 value={filters.sort}
                 onChange={handleFilterChange}
               >
-                <option value="price_asc">Price: Low to High</option>
-                <option value="price_desc">Price: High to Low</option>
-                <option value="rating_desc">Highest Rated</option>
+                <option value="price_asc">Tariff: Low to High</option>
+                <option value="price_desc">Tariff: High to Low</option>
+                <option value="rating_desc">Highest Royal Rating</option>
               </select>
             </div>
           </div>
 
           {/* Price Range Slider */}
           <div className="mt-3 pt-3 border-top d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3">
-            <div className="d-flex align-items-center gap-3 w-100" style={{ maxWidth: '420px' }}>
-              <span className="small text-muted fw-bold text-nowrap">Max Price: ${filters.maxPrice}</span>
+            <div className="d-flex align-items-center gap-3 w-100" style={{ maxWidth: '480px' }}>
+              <span className="small text-muted fw-bold text-nowrap">
+                Max Tariff: <span className="text-dark fw-bold">₹{Number(filters.maxPrice).toLocaleString('en-IN')}</span> / night
+              </span>
               <input
                 type="range"
                 className="form-range"
-                min="100"
-                max="600"
-                step="25"
+                min="5000"
+                max="60000"
+                step="2500"
                 name="maxPrice"
                 value={filters.maxPrice}
                 onChange={handleFilterChange}
@@ -254,25 +262,25 @@ const Rooms = () => {
         {/* Results Info */}
         <div className="d-flex align-items-center justify-content-between mb-4">
           <div className="fw-semibold text-secondary">
-            Showing <span className="text-dark fw-bold">{rooms.length}</span> rooms available for your dates
+            Showing <span className="text-dark fw-bold font-regal">{rooms.length}</span> royal chambers available for your chosen dates
           </div>
         </div>
 
         {/* Room Grid */}
         {loading ? (
-          <LoadingSpinner text="Searching available rooms with date overlap engine..." />
+          <LoadingSpinner text="Searching palace chambers with date-overlap availability engine..." />
         ) : error ? (
           <div className="alert alert-danger rounded-3 p-4 text-center">
-            <h5>Unable to Load Rooms</h5>
+            <h5>Unable to Load Suites</h5>
             <p className="mb-3">{error}</p>
-            <button onClick={fetchRooms} className="btn btn-outline-danger btn-sm">
+            <button onClick={fetchRooms} className="btn btn-maroon btn-sm">
               Try Again
             </button>
           </div>
         ) : rooms.length === 0 ? (
           <EmptyState
-            title="No Rooms Available"
-            description="All rooms matching your selected dates, guest count, or filters are either booked or undergoing maintenance. Try adjusting your dates or category."
+            title="No Royal Chambers Available"
+            description="All suites matching your selected dates, guest count, or category are currently reserved by patrons. Please adjust your travel dates or category."
             actionText="Reset All Filters"
             onAction={handleResetFilters}
           />

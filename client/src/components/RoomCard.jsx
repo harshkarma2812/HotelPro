@@ -96,14 +96,16 @@ const RoomCard = ({ room, nights = 1, showBookingControls = true }) => {
         {/* Pricing and Action */}
         <div className="mt-auto pt-3 border-top d-flex align-items-center justify-content-between">
           <div>
-            <div className="text-muted small">Starting from</div>
+            <div className="text-muted small">Royal Tariff</div>
             <div className="d-flex align-items-baseline gap-1">
-              <span className="fs-4 fw-bold text-dark font-serif">${room.price}</span>
+              <span className="fs-4 fw-bold text-dark font-serif" style={{ color: '#6e0d25' }}>
+                ₹{Number(room.price).toLocaleString('en-IN')}
+              </span>
               <span className="text-muted small">/ night</span>
             </div>
             {nights > 1 && (
               <div className="text-success small fw-medium">
-                ${room.price * nights} total ({nights} nights)
+                ₹{(room.price * nights).toLocaleString('en-IN')} total ({nights} nights)
               </div>
             )}
           </div>
@@ -113,15 +115,15 @@ const RoomCard = ({ room, nights = 1, showBookingControls = true }) => {
               to={`/rooms/${room._id}`}
               className="btn btn-outline-dark btn-sm rounded-3 px-3 d-flex align-items-center gap-1"
             >
-              Details
+              Quarters
             </Link>
             {room.status === 'Available' && (
               <button
                 type="button"
                 onClick={handleBookNow}
-                className="btn btn-gold btn-sm rounded-3 px-3 d-flex align-items-center gap-1"
+                className="btn btn-gold btn-sm rounded-3 px-3 d-flex align-items-center gap-1 shadow-sm"
               >
-                Book <ArrowRight size={14} />
+                Reserve <ArrowRight size={14} />
               </button>
             )}
           </div>

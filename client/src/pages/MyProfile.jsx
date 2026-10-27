@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { User, Mail, Phone, Lock, ShieldCheck, Award, CheckCircle2, AlertCircle } from 'lucide-react';
+import { User, Mail, Phone, Lock, ShieldCheck, Award, CheckCircle2, AlertCircle, Crown, Sparkles } from 'lucide-react';
 
 const MyProfile = () => {
   const { user, updateProfile } = useAuth();
@@ -50,7 +50,7 @@ const MyProfile = () => {
         newPassword: formData.newPassword || undefined
       });
 
-      setSuccess('Profile updated successfully!');
+      setSuccess('Royal profile credentials updated successfully!');
       setFormData((prev) => ({
         ...prev,
         currentPassword: '',
@@ -65,32 +65,37 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="py-5">
+    <div className="py-5" style={{ backgroundColor: '#fcfaf6' }}>
       <div className="container">
         {/* Header */}
         <div className="mb-4">
-          <span className="section-tag">Account Settings</span>
-          <h1 className="display-6 fw-bold font-serif text-dark mb-1">My Guest Profile</h1>
-          <p className="text-muted">Manage your personal information, contact numbers, and security credentials</p>
+          <div className="d-flex align-items-center gap-2 mb-1">
+            <span className="badge-royal">
+              <Crown size={12} className="me-1" /> शाही विवरण
+            </span>
+            <span className="text-muted small">Account Credentials</span>
+          </div>
+          <h1 className="display-6 fw-bold font-regal text-dark mb-1">My Royal Profile</h1>
+          <p className="text-muted">Manage your personal title, contact numbers, and security credentials</p>
         </div>
 
         <div className="row g-4">
           {/* Left: Summary Card */}
           <div className="col-12 col-lg-4">
-            <div className="card luxury-card p-4 text-center border-0 mb-4">
+            <div className="card luxury-card p-4 text-center border-0 mb-4 shadow-sm" style={{ backgroundColor: '#ffffff' }}>
               <div className="d-flex justify-content-center mb-3">
                 <div
-                  className="rounded-circle bg-dark text-warning fw-bold fs-2 d-flex align-items-center justify-content-center shadow"
-                  style={{ width: '90px', height: '90px', border: '3px solid #c5a880' }}
+                  className="rounded-circle fw-bold fs-2 d-flex align-items-center justify-content-center shadow"
+                  style={{ width: '90px', height: '90px', backgroundColor: '#6e0d25', color: '#c99a3e', border: '3px solid #c99a3e' }}
                 >
                   {user?.name?.charAt(0) || 'G'}
                 </div>
               </div>
-              <h4 className="fw-bold font-serif text-dark mb-1">{user?.name}</h4>
+              <h4 className="fw-bold font-regal text-dark mb-1">{user?.name}</h4>
               <p className="text-muted small mb-2">{user?.email}</p>
               <div className="d-flex justify-content-center gap-2 mb-3">
-                <span className="badge badge-gold d-flex align-items-center gap-1">
-                  <Award size={14} /> VIP Platinum Guest
+                <span className="badge-royal d-flex align-items-center gap-1">
+                  <Crown size={12} /> VIP Shahi Patron
                 </span>
                 <span className="badge bg-dark text-white text-capitalize">
                   {user?.role}
@@ -103,7 +108,7 @@ const MyProfile = () => {
                 </div>
                 <div className="d-flex justify-content-between mb-2">
                   <span className="text-muted">Account Status:</span>
-                  <span className="text-success fw-bold">Active & Verified</span>
+                  <span className="text-success fw-bold">Active & Verified Patron</span>
                 </div>
                 <div className="d-flex justify-content-between">
                   <span className="text-muted">Member Since:</span>
@@ -112,21 +117,21 @@ const MyProfile = () => {
               </div>
             </div>
 
-            <div className="card p-3 bg-light rounded-4 border">
+            <div className="card p-3 rounded-4 border shadow-sm" style={{ backgroundColor: '#fff9ed', borderColor: '#e8dec8' }}>
               <div className="d-flex align-items-center gap-2 mb-2">
                 <ShieldCheck size={20} className="text-success" />
-                <h6 className="fw-bold text-dark mb-0">HotelPro Privacy Guarantee</h6>
+                <h6 className="fw-bold text-dark font-regal mb-0">HotelPro Privacy Guarantee</h6>
               </div>
               <p className="text-muted small mb-0">
-                Your personal details and stay preferences are guarded with strict encryption standards and never shared with third parties.
+                Your royal profile information and stay preferences are strictly guarded with cryptographic encryption and never shared.
               </p>
             </div>
           </div>
 
           {/* Right: Update Form */}
           <div className="col-12 col-lg-8">
-            <div className="card luxury-card p-4 p-md-5 border-0">
-              <h4 className="fw-bold font-serif text-dark mb-3">Update Personal Details</h4>
+            <div className="card luxury-card p-4 p-md-5 border-0 shadow-sm" style={{ backgroundColor: '#ffffff' }}>
+              <h4 className="fw-bold font-regal text-dark mb-3">Update Personal Details</h4>
 
               {success && (
                 <div className="alert alert-success py-2 px-3 small d-flex align-items-center gap-2 mb-3">
@@ -143,26 +148,26 @@ const MyProfile = () => {
               )}
 
               <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label className="form-label small fw-bold text-muted">Full Legal Name / Title</label>
+                  <div className="input-group">
+                    <span className="input-group-text bg-white border-end-0">
+                      <User size={16} className="text-muted" />
+                    </span>
+                    <input
+                      type="text"
+                      name="name"
+                      className="form-control border-start-0 ps-0 py-2 rounded-end-3"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
+
                 <div className="row g-3 mb-4">
                   <div className="col-12 col-sm-6">
-                    <label className="form-label small fw-bold text-muted">Full Legal Name</label>
-                    <div className="input-group">
-                      <span className="input-group-text bg-white border-end-0">
-                        <User size={16} className="text-muted" />
-                      </span>
-                      <input
-                        type="text"
-                        name="name"
-                        className="form-control border-start-0 ps-0 py-2 rounded-end-3"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="col-12 col-sm-6">
-                    <label className="form-label small fw-bold text-muted">Email (Read Only)</label>
+                    <label className="form-label small fw-bold text-muted">Email Address (Primary)</label>
                     <div className="input-group">
                       <span className="input-group-text bg-light border-end-0">
                         <Mail size={16} className="text-muted" />
@@ -176,8 +181,8 @@ const MyProfile = () => {
                     </div>
                   </div>
 
-                  <div className="col-12">
-                    <label className="form-label small fw-bold text-muted">Contact Phone Number</label>
+                  <div className="col-12 col-sm-6">
+                    <label className="form-label small fw-bold text-muted">Mobile / WhatsApp Number</label>
                     <div className="input-group">
                       <span className="input-group-text bg-white border-end-0">
                         <Phone size={16} className="text-muted" />
@@ -186,38 +191,36 @@ const MyProfile = () => {
                         type="tel"
                         name="phone"
                         className="form-control border-start-0 ps-0 py-2 rounded-end-3"
+                        placeholder="+91 98765 43210"
                         value={formData.phone}
                         onChange={handleChange}
-                        required
                       />
                     </div>
                   </div>
                 </div>
 
-                <h5 className="fw-bold font-serif text-dark mb-3 pt-3 border-top">Change Password</h5>
-                <p className="text-muted small mb-3">
-                  Leave password fields blank if you do not wish to change your current password.
-                </p>
+                <hr className="my-4" />
+                <h5 className="fw-bold font-regal text-dark mb-3">Change Password (Optional)</h5>
+
+                <div className="mb-3">
+                  <label className="form-label small fw-bold text-muted">Current Password</label>
+                  <div className="input-group">
+                    <span className="input-group-text bg-white border-end-0">
+                      <Lock size={16} className="text-muted" />
+                    </span>
+                    <input
+                      type="password"
+                      name="currentPassword"
+                      className="form-control border-start-0 ps-0 py-2 rounded-end-3"
+                      placeholder="Enter current password to authorize change"
+                      value={formData.currentPassword}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
 
                 <div className="row g-3 mb-4">
-                  <div className="col-12 col-sm-4">
-                    <label className="form-label small fw-bold text-muted">Current Password</label>
-                    <div className="input-group">
-                      <span className="input-group-text bg-white border-end-0">
-                        <Lock size={16} className="text-muted" />
-                      </span>
-                      <input
-                        type="password"
-                        name="currentPassword"
-                        className="form-control border-start-0 ps-0 py-2 rounded-end-3"
-                        placeholder="••••••••"
-                        value={formData.currentPassword}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="col-12 col-sm-4">
+                  <div className="col-12 col-sm-6">
                     <label className="form-label small fw-bold text-muted">New Password</label>
                     <div className="input-group">
                       <span className="input-group-text bg-white border-end-0">
@@ -227,14 +230,14 @@ const MyProfile = () => {
                         type="password"
                         name="newPassword"
                         className="form-control border-start-0 ps-0 py-2 rounded-end-3"
-                        placeholder="Min 6 chars"
+                        placeholder="At least 6 characters"
                         value={formData.newPassword}
                         onChange={handleChange}
                       />
                     </div>
                   </div>
 
-                  <div className="col-12 col-sm-4">
+                  <div className="col-12 col-sm-6">
                     <label className="form-label small fw-bold text-muted">Confirm New Password</label>
                     <div className="input-group">
                       <span className="input-group-text bg-white border-end-0">
@@ -244,7 +247,7 @@ const MyProfile = () => {
                         type="password"
                         name="confirmPassword"
                         className="form-control border-start-0 ps-0 py-2 rounded-end-3"
-                        placeholder="Re-enter new"
+                        placeholder="Repeat new password"
                         value={formData.confirmPassword}
                         onChange={handleChange}
                       />
@@ -255,9 +258,9 @@ const MyProfile = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="btn btn-gold px-4 py-2 fw-bold rounded-3 shadow-sm"
+                  className="btn btn-maroon px-4 py-2 fw-bold rounded-3 shadow-sm"
                 >
-                  {loading ? 'Saving Changes...' : 'Save Profile Changes'}
+                  {loading ? 'Updating Credentials...' : 'Save Profile Changes'}
                 </button>
               </form>
             </div>

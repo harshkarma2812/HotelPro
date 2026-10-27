@@ -3,7 +3,6 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
 import {
-  Building2,
   Calendar,
   Users,
   BedDouble,
@@ -16,7 +15,8 @@ import {
   MapPin,
   Clock,
   ShieldCheck,
-  QrCode
+  Crown,
+  Sparkles
 } from 'lucide-react';
 
 const BookingDetails = () => {
@@ -39,7 +39,7 @@ const BookingDetails = () => {
         setPayment(res.data.payment);
       }
     } catch (err) {
-      setError(err.message || 'Failed to retrieve booking information');
+      setError(err.message || 'Failed to retrieve palace booking information');
     } finally {
       setLoading(false);
     }
@@ -50,7 +50,7 @@ const BookingDetails = () => {
   }, [id]);
 
   const handleCancel = async () => {
-    if (!window.confirm('Are you sure you want to cancel this booking? Refund will be issued if payment was completed.')) {
+    if (!window.confirm('Are you sure you want to cancel this royal reservation? An instant refund will be recorded back to your demo payment method.')) {
       return;
     }
 
@@ -58,25 +58,25 @@ const BookingDetails = () => {
     try {
       const res = await api.put(`/bookings/${booking._id}/cancel`);
       if (res.data?.success) {
-        setCancelMessage('Booking successfully cancelled and refund recorded.');
+        setCancelMessage('Palace reservation cancelled successfully. Full refund has been recorded.');
         fetchDetails();
       }
     } catch (err) {
-      setError(err.message || 'Failed to cancel booking');
+      setError(err.message || 'Failed to cancel reservation');
     } finally {
       setCancelling(false);
     }
   };
 
   if (loading) {
-    return <LoadingSpinner text="Generating booking receipt & voucher..." />;
+    return <LoadingSpinner text="Generating Shahi Farman (शाही फरमान) stay voucher..." />;
   }
 
   if (error || !booking) {
     return (
       <div className="container py-5 text-center">
         <div className="alert alert-danger p-4 rounded-3 d-inline-block">
-          <h4>Unable to Load Booking</h4>
+          <h4>Unable to Load Farman</h4>
           <p>{error || 'Reservation could not be found.'}</p>
           <Link to="/my-bookings" className="btn btn-outline-danger mt-2">
             Back to My Bookings
@@ -87,7 +87,7 @@ const BookingDetails = () => {
   }
 
   return (
-    <div className="py-5">
+    <div className="py-5" style={{ backgroundColor: '#fcfaf6' }}>
       <div className="container">
         {/* Top Controls (Hidden in Print) */}
         <div className="no-print d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
@@ -100,7 +100,7 @@ const BookingDetails = () => {
               onClick={() => window.print()}
               className="btn btn-dark btn-sm rounded-3 d-flex align-items-center gap-2 px-3"
             >
-              <Printer size={16} /> Print Voucher / Invoice
+              <Printer size={16} /> Print Shahi Farman / Invoice
             </button>
 
             {booking.bookingStatus !== 'Cancelled' && booking.bookingStatus !== 'Checked-Out' && (
@@ -109,7 +109,7 @@ const BookingDetails = () => {
                 disabled={cancelling}
                 className="btn btn-outline-danger btn-sm rounded-3 d-flex align-items-center gap-1 px-3"
               >
-                <XCircle size={16} /> Cancel Stay
+                <XCircle size={16} /> Cancel Reservation
               </button>
             )}
 
@@ -132,22 +132,28 @@ const BookingDetails = () => {
         )}
 
         {/* Printable Voucher Card */}
-        <div className="card luxury-card p-4 p-md-5 border-0 shadow-sm print-invoice bg-white">
+        <div className="card luxury-card p-4 p-md-5 border-0 shadow-sm print-invoice bg-white" style={{ border: '2px solid #e8dec8' }}>
           {/* Header */}
           <div className="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center pb-4 mb-4 border-bottom gap-3">
             <div className="d-flex align-items-center gap-3">
-              <div className="bg-dark text-warning p-3 rounded-3 d-flex align-items-center justify-content-center">
-                <Building2 size={32} />
+              <div
+                className="p-3 rounded-3 d-flex align-items-center justify-content-center"
+                style={{ backgroundColor: '#6e0d25', color: '#c99a3e' }}
+              >
+                <Crown size={36} />
               </div>
               <div>
-                <h3 className="fw-bold font-serif text-dark mb-0">Hotel<span style={{ color: '#c5a880' }}>Pro</span></h3>
-                <div className="text-muted small">Official Guest Reservation Voucher & Invoice</div>
+                <div className="d-flex align-items-center gap-2">
+                  <h3 className="fw-bold font-regal text-dark mb-0">Hotel<span style={{ color: '#c99a3e' }}>Pro</span></h3>
+                  <span className="badge-royal">शाही महल</span>
+                </div>
+                <div className="text-muted small">Royal Heritage Haveli & Palace Stay Voucher (शाही फरमान)</div>
               </div>
             </div>
 
             <div className="text-sm-end">
-              <span className="badge badge-gold px-3 py-2 fs-6 mb-1">
-                Ref: {booking.bookingId}
+              <span className="badge-royal px-3 py-2 fs-6 mb-1 d-inline-block">
+                Farman Ref: {booking.bookingId}
               </span>
               <div className="text-muted small">
                 Issued on {new Date(booking.createdAt).toLocaleDateString()}
@@ -165,8 +171,8 @@ const BookingDetails = () => {
                 <span>Payment: {booking.paymentStatus}</span>
               </div>
             </div>
-            <div className="small text-muted">
-              Guaranteed Reservation
+            <div className="small text-muted font-monospace">
+              Royal Guarantee Code: HP-{booking.bookingId?.replace(/[^0-9]/g, '') || '7789'}
             </div>
           </div>
 
@@ -174,7 +180,7 @@ const BookingDetails = () => {
           <div className="row g-4 mb-5">
             {/* Guest Info */}
             <div className="col-12 col-md-6 col-lg-3">
-              <h6 className="text-uppercase text-muted small fw-bold mb-3">Primary Guest</h6>
+              <h6 className="text-uppercase text-muted small fw-bold mb-3 font-regal">Honored Guest</h6>
               <div className="fw-bold text-dark fs-6">{booking.guestName}</div>
               <div className="text-secondary small">{booking.guestEmail}</div>
               <div className="text-secondary small">{booking.guestPhone}</div>
@@ -183,52 +189,52 @@ const BookingDetails = () => {
 
             {/* Room Details */}
             <div className="col-12 col-md-6 col-lg-3">
-              <h6 className="text-uppercase text-muted small fw-bold mb-3">Accommodation</h6>
-              <div className="fw-bold text-dark fs-6">{booking.room?.roomType} Suite</div>
-              <div className="text-secondary small">Room #{booking.room?.roomNumber} (Floor {booking.room?.floor || 1})</div>
+              <h6 className="text-uppercase text-muted small fw-bold mb-3 font-regal">Palace Chamber</h6>
+              <div className="fw-bold text-dark fs-6">{booking.room?.roomType}</div>
+              <div className="text-secondary small">Chamber #{booking.room?.roomNumber} (Floor {booking.room?.floor || 1})</div>
               <div className="text-secondary small">Bedding: {booking.room?.bedType}</div>
-              <div className="text-secondary small">Area: {booking.room?.size || 350} sq ft</div>
+              <div className="text-secondary small">Area: {booking.room?.size || 550} sq ft</div>
             </div>
 
             {/* Stay Dates */}
             <div className="col-12 col-md-6 col-lg-3">
-              <h6 className="text-uppercase text-muted small fw-bold mb-3">Schedule</h6>
+              <h6 className="text-uppercase text-muted small fw-bold mb-3 font-regal">Schedule & Darshan</h6>
               <div className="small">
-                <span className="text-muted d-block">Check-in:</span>
-                <strong className="text-dark">{new Date(booking.checkIn).toLocaleDateString()} (3:00 PM)</strong>
+                <span className="text-muted d-block">Royal Check-in:</span>
+                <strong className="text-dark">{new Date(booking.checkIn).toLocaleDateString()} (2:00 PM)</strong>
               </div>
               <div className="small mt-2">
                 <span className="text-muted d-block">Check-out:</span>
-                <strong className="text-dark">{new Date(booking.checkOut).toLocaleDateString()} (11:00 AM)</strong>
+                <strong className="text-dark">{new Date(booking.checkOut).toLocaleDateString()} (12:00 PM)</strong>
               </div>
               <div className="text-muted small mt-1">Duration: {booking.nights} {booking.nights === 1 ? 'night' : 'nights'}</div>
             </div>
 
             {/* Hotel Location & Security */}
             <div className="col-12 col-md-6 col-lg-3">
-              <h6 className="text-uppercase text-muted small fw-bold mb-3">Property Details</h6>
+              <h6 className="text-uppercase text-muted small fw-bold mb-3 font-regal">Estate Address</h6>
               <div className="small text-secondary">
                 <MapPin size={14} className="text-warning me-1" />
-                100 Grand Boulevard, Waterfront Harbor, NY 10001
+                HotelPro Heritage Palace, Lake Pichola, City Palace Complex, Udaipur, Rajasthan 313001
               </div>
               <div className="small text-secondary mt-1">
-                Concierge: +1 (800) 555-HOTEL
+                Concierge: +91 (294) 242-8800
               </div>
               <div className="d-flex align-items-center gap-1 text-success small mt-2">
-                <ShieldCheck size={16} /> Verified Booking
+                <ShieldCheck size={16} /> Verified Palace Voucher
               </div>
             </div>
           </div>
 
           {/* Payment & Invoice Breakdown */}
           <div className="border rounded-3 p-4 mb-4 bg-light">
-            <h5 className="fw-bold font-serif text-dark mb-3">Billing & Payment Summary</h5>
+            <h5 className="fw-bold font-regal text-dark mb-3">Billing & Tax Invoice (INR)</h5>
             <div className="table-responsive">
               <table className="table table-borderless align-middle mb-0">
                 <thead>
                   <tr className="border-bottom small text-muted text-uppercase">
                     <th>Description</th>
-                    <th className="text-center">Rate</th>
+                    <th className="text-center">Rate / Night</th>
                     <th className="text-center">Nights</th>
                     <th className="text-end">Amount</th>
                   </tr>
@@ -236,23 +242,23 @@ const BookingDetails = () => {
                 <tbody>
                   <tr className="border-bottom">
                     <td>
-                      <div className="fw-bold text-dark">{booking.room?.roomType} Suite Room #{booking.room?.roomNumber}</div>
-                      <div className="text-muted small">Standard luxury accommodation, daily housekeeping, organic bath amenities</div>
+                      <div className="fw-bold text-dark">{booking.room?.roomType} Chamber #{booking.room?.roomNumber}</div>
+                      <div className="text-muted small">Includes royal buffet breakfast, lakeside boat transfer, and dedicated Khidmatgar</div>
                     </td>
-                    <td className="text-center">${booking.pricePerNight}</td>
+                    <td className="text-center">₹{booking.pricePerNight?.toLocaleString('en-IN')}</td>
                     <td className="text-center">{booking.nights}</td>
-                    <td className="text-end fw-bold">${booking.pricePerNight * booking.nights}</td>
+                    <td className="text-end fw-bold">₹{(booking.pricePerNight * booking.nights)?.toLocaleString('en-IN')}</td>
                   </tr>
                   <tr className="border-bottom text-muted small">
-                    <td colSpan="3">Hospitality Tax & Destination Fee (10% included)</td>
-                    <td className="text-end fw-medium text-dark">${Math.round(booking.totalAmount * 0.1)}</td>
+                    <td colSpan="3">Palace Heritage Luxury GST & Seva (12% included)</td>
+                    <td className="text-end fw-medium text-dark">₹{Math.round(booking.totalAmount * 0.12)?.toLocaleString('en-IN')}</td>
                   </tr>
                   <tr>
-                    <td colSpan="3" className="fs-5 fw-bold text-dark font-serif text-end pt-3">
+                    <td colSpan="3" className="fs-5 fw-bold text-dark font-regal text-end pt-3">
                       Total Invoice Amount:
                     </td>
-                    <td className="fs-4 fw-bold text-warning font-serif text-end pt-3">
-                      ${booking.totalAmount}
+                    <td className="fs-4 fw-bold font-regal text-end pt-3" style={{ color: '#6e0d25' }}>
+                      ₹{booking.totalAmount?.toLocaleString('en-IN')}
                     </td>
                   </tr>
                 </tbody>
@@ -269,7 +275,7 @@ const BookingDetails = () => {
                   <strong>Transaction ID:</strong> {payment.transactionId}
                 </div>
                 <div>
-                  <strong>Method:</strong> {payment.paymentMethod} (ending in {payment.cardLastFour})
+                  <strong>Method:</strong> {payment.paymentMethod}
                 </div>
                 <div>
                   <strong>Status:</strong> <span className="badge bg-success">{payment.paymentStatus}</span>
@@ -281,14 +287,14 @@ const BookingDetails = () => {
           {/* Special Requests */}
           {booking.specialRequests && (
             <div className="p-3 bg-white border rounded-3 mb-4">
-              <strong className="text-dark small d-block mb-1">Guest Special Requests:</strong>
+              <strong className="text-dark small d-block mb-1">Guest Special Royal Requests:</strong>
               <p className="text-secondary small mb-0 fst-italic">"{booking.specialRequests}"</p>
             </div>
           )}
 
           {/* Footer note */}
           <div className="text-center text-muted small pt-3 border-top">
-            Thank you for choosing HotelPro. Please present this confirmation voucher or booking reference at the front desk upon arrival.
+            अतिथि देवो भव • Thank you for honoring HotelPro with your presence. Please present this Shahi Farman or reservation reference code upon arrival at the City Palace Jetty.
           </div>
         </div>
       </div>

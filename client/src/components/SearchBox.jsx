@@ -93,7 +93,7 @@ const SearchBox = ({ isCompact = false }) => {
         {/* Room Type */}
         <div className="col-12 col-sm-6 col-lg-2">
           <label className="form-label small fw-bold text-dark d-flex align-items-center gap-1 mb-1">
-            <Home size={14} className="text-warning" /> Category
+            <Home size={14} className="text-warning" /> Palace Quarters
           </label>
           <select
             className="form-select py-2 rounded-3"
@@ -101,12 +101,14 @@ const SearchBox = ({ isCompact = false }) => {
             value={formData.roomType}
             onChange={handleChange}
           >
-            <option value="All">All Categories</option>
-            <option value="Standard Room">Standard Room</option>
-            <option value="Deluxe Room">Deluxe Room</option>
-            <option value="Executive Room">Executive Room</option>
+            <option value="All">All Royal Quarters</option>
+            <option value="Maharaja Presidential Suite">Maharaja Suite</option>
+            <option value="Maharani Royal Suite">Maharani Suite</option>
+            <option value="Yuvraj Heritage Suite">Yuvraj Suite</option>
+            <option value="Rajputana Deluxe Room">Rajputana Deluxe</option>
+            <option value="Haveli Courtyard Room">Haveli Courtyard</option>
             <option value="Suite">Royal Suite</option>
-            <option value="Family Room">Family Room</option>
+            <option value="Deluxe Room">Deluxe Room</option>
           </select>
         </div>
 
@@ -114,7 +116,7 @@ const SearchBox = ({ isCompact = false }) => {
         <div className="col-12 col-lg-2">
           <button type="submit" className="btn btn-gold w-100 py-2 d-flex align-items-center justify-content-center gap-2">
             <Search size={18} />
-            <span>Search</span>
+            <span>Search Palace</span>
           </button>
         </div>
       </div>

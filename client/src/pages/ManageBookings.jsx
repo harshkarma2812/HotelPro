@@ -7,14 +7,10 @@ import api from '../services/api';
 import {
   CalendarCheck,
   Search,
-  Filter,
   CheckCircle2,
   AlertCircle,
   Eye,
-  UserCheck,
-  LogOut,
-  XCircle,
-  Clock
+  Crown
 } from 'lucide-react';
 
 const ManageBookings = () => {
@@ -93,9 +89,14 @@ const ManageBookings = () => {
         {/* Header */}
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-3 border-bottom">
           <div>
-            <span className="section-tag">Front Desk & Concierge Operations</span>
-            <h1 className="display-6 fw-bold font-serif text-dark mb-1">Manage All Bookings</h1>
-            <p className="text-muted mb-0">Monitor check-ins, departures, cancellations, and reservation statuses</p>
+            <div className="d-flex align-items-center gap-2 mb-1">
+              <span className="badge-royal">
+                <Crown size={12} className="me-1" /> शाही आरक्षण बही
+              </span>
+              <span className="text-muted small">Front Desk Operations</span>
+            </div>
+            <h1 className="display-6 fw-bold font-regal text-dark mb-1">Manage All Bookings</h1>
+            <p className="text-muted mb-0">Monitor royal check-ins, departures, cancellations, and reservation statuses</p>
           </div>
         </div>
 
@@ -114,7 +115,7 @@ const ManageBookings = () => {
         )}
 
         {/* Filter Bar */}
-        <div className="card luxury-card p-3 mb-4 border-0">
+        <div className="card luxury-card p-3 mb-4 border-0 shadow-sm" style={{ backgroundColor: '#ffffff' }}>
           <div className="row g-3">
             <div className="col-12 col-md-6">
               <div className="input-group">
@@ -124,7 +125,7 @@ const ManageBookings = () => {
                 <input
                   type="text"
                   className="form-control border-start-0 ps-0"
-                  placeholder="Search by Booking ID, Guest Name, or Email..."
+                  placeholder="Search by Farman Ref, Guest Name, or Email..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
@@ -156,7 +157,7 @@ const ManageBookings = () => {
 
         {/* Bookings Table */}
         {loading ? (
-          <LoadingSpinner text="Retrieving booking ledger..." />
+          <LoadingSpinner text="Retrieving palace booking ledger..." />
         ) : filteredBookings.length === 0 ? (
           <EmptyState
             title="No Bookings Found"
@@ -168,16 +169,16 @@ const ManageBookings = () => {
             }}
           />
         ) : (
-          <div className="card luxury-card border-0 p-3">
+          <div className="card luxury-card border-0 p-3 shadow-sm" style={{ backgroundColor: '#ffffff' }}>
             <div className="table-responsive">
               <table className="table table-hover align-middle mb-0">
                 <thead className="table-light">
                   <tr className="small text-muted text-uppercase">
-                    <th>Booking Ref</th>
-                    <th>Guest</th>
-                    <th>Room</th>
+                    <th>Farman Ref</th>
+                    <th>Honored Guest</th>
+                    <th>Palace Suite</th>
                     <th>Dates & Nights</th>
-                    <th>Total</th>
+                    <th>Tariff (INR)</th>
                     <th>Payment</th>
                     <th>Status</th>
                     <th className="text-end">Manage Status</th>
@@ -195,8 +196,8 @@ const ManageBookings = () => {
                         <div className="text-muted small">{b.guestPhone}</div>
                       </td>
                       <td>
-                        <div className="fw-semibold text-dark">{b.room?.roomType}</div>
-                        <div className="text-muted small">Room #{b.room?.roomNumber}</div>
+                        <div className="fw-semibold text-dark font-regal">{b.room?.roomType}</div>
+                        <div className="text-muted small">Chamber #{b.room?.roomNumber}</div>
                       </td>
                       <td className="small text-secondary">
                         <div>
@@ -206,8 +207,8 @@ const ManageBookings = () => {
                           {b.nights} {b.nights === 1 ? 'night' : 'nights'} • {b.guests} Guests
                         </div>
                       </td>
-                      <td className="fw-bold text-dark font-serif fs-6">
-                        ${b.totalAmount}
+                      <td className="fw-bold text-dark font-regal fs-6" style={{ color: '#6e0d25' }}>
+                        ₹{b.totalAmount?.toLocaleString('en-IN')}
                       </td>
                       <td>
                         <span className={`badge ${b.paymentStatus === 'Paid' ? 'bg-success-subtle text-success' : b.paymentStatus === 'Refunded' ? 'bg-info-subtle text-info' : 'bg-warning-subtle text-warning'}`}>
@@ -222,7 +223,7 @@ const ManageBookings = () => {
                             className="btn btn-sm btn-outline-secondary p-1 px-2"
                             title="View Voucher"
                           >
-                            <Eye size={14} /> View
+                            <Eye size={14} /> Farman
                           </Link>
 
                           {b.bookingStatus === 'Pending' && (

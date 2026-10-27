@@ -13,7 +13,7 @@ import {
   CheckCircle2,
   AlertCircle,
   Search,
-  Filter
+  Crown
 } from 'lucide-react';
 
 const ManageRooms = () => {
@@ -47,7 +47,7 @@ const ManageRooms = () => {
     try {
       const res = await api.patch(`/rooms/${roomId}/status`, { status: newStatus });
       if (res.data?.success) {
-        setMessage(`Room status updated to ${newStatus}`);
+        setMessage(`Chamber status updated to ${newStatus}`);
         setRooms(rooms.map((r) => (r._id === roomId ? { ...r, status: newStatus } : r)));
       }
     } catch (err) {
@@ -56,14 +56,14 @@ const ManageRooms = () => {
   };
 
   const handleDeleteRoom = async (roomId, roomNumber) => {
-    if (!window.confirm(`Are you sure you want to permanently delete Room #${roomNumber}?`)) {
+    if (!window.confirm(`Are you sure you want to permanently delete Chamber #${roomNumber}?`)) {
       return;
     }
 
     try {
       const res = await api.delete(`/rooms/${roomId}`);
       if (res.data?.success) {
-        setMessage(`Room #${roomNumber} was successfully deleted.`);
+        setMessage(`Chamber #${roomNumber} was successfully removed from inventory.`);
         setRooms(rooms.filter((r) => r._id !== roomId));
       }
     } catch (err) {
@@ -88,12 +88,17 @@ const ManageRooms = () => {
         {/* Header */}
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-3 border-bottom">
           <div>
-            <span className="section-tag">Inventory Control</span>
-            <h1 className="display-6 fw-bold font-serif text-dark mb-1">Room Management</h1>
-            <p className="text-muted mb-0">Total of {rooms.length} rooms & suites currently registered in the system</p>
+            <div className="d-flex align-items-center gap-2 mb-1">
+              <span className="badge-royal">
+                <Crown size={12} className="me-1" /> शाही महल सूची
+              </span>
+              <span className="text-muted small">Palace Inventory</span>
+            </div>
+            <h1 className="display-6 fw-bold font-regal text-dark mb-1">Palace Suites Management</h1>
+            <p className="text-muted mb-0">Total of {rooms.length} royal suites & heritage chambers registered in the estate</p>
           </div>
-          <Link to="/admin/rooms/add" className="btn btn-gold rounded-3 d-flex align-items-center gap-2 mt-3 mt-md-0 shadow-sm">
-            <PlusCircle size={18} /> Add New Room
+          <Link to="/admin/rooms/add" className="btn btn-maroon rounded-3 d-flex align-items-center gap-2 mt-3 mt-md-0 shadow-sm">
+            <PlusCircle size={18} /> Add New Suite
           </Link>
         </div>
 
@@ -112,7 +117,7 @@ const ManageRooms = () => {
         )}
 
         {/* Search & Filter Bar */}
-        <div className="card luxury-card p-3 mb-4 border-0">
+        <div className="card luxury-card p-3 mb-4 border-0 shadow-sm" style={{ backgroundColor: '#ffffff' }}>
           <div className="row g-3">
             <div className="col-12 col-md-5">
               <div className="input-group">
@@ -122,7 +127,7 @@ const ManageRooms = () => {
                 <input
                   type="text"
                   className="form-control border-start-0 ps-0"
-                  placeholder="Search by room number or category..."
+                  placeholder="Search by chamber number or category..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
@@ -135,12 +140,12 @@ const ManageRooms = () => {
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
               >
-                <option value="All">All Categories</option>
-                <option value="Standard Room">Standard Room</option>
-                <option value="Deluxe Room">Deluxe Room</option>
-                <option value="Executive Room">Executive Room</option>
-                <option value="Suite">Royal Suite</option>
-                <option value="Family Room">Family Room</option>
+                <option value="All">All Royal Categories</option>
+                <option value="Maharaja Presidential Suite">Maharaja Presidential Suite</option>
+                <option value="Maharani Royal Suite">Maharani Royal Suite</option>
+                <option value="Yuvraj Heritage Suite">Yuvraj Heritage Suite</option>
+                <option value="Rajputana Deluxe Room">Rajputana Deluxe Room</option>
+                <option value="Haveli Courtyard Room">Haveli Courtyard Room</option>
               </select>
             </div>
 
@@ -167,10 +172,10 @@ const ManageRooms = () => {
 
         {/* Table */}
         {loading ? (
-          <LoadingSpinner text="Fetching room directory..." />
+          <LoadingSpinner text="Fetching palace suite directory..." />
         ) : filteredRooms.length === 0 ? (
           <EmptyState
-            title="No Rooms Match Filter"
+            title="No Suites Match Filter"
             description="No room records were found matching your current search parameters."
             actionText="Clear Filters"
             onAction={() => {
@@ -180,14 +185,14 @@ const ManageRooms = () => {
             }}
           />
         ) : (
-          <div className="card luxury-card border-0 p-3">
+          <div className="card luxury-card border-0 p-3 shadow-sm" style={{ backgroundColor: '#ffffff' }}>
             <div className="table-responsive">
               <table className="table table-hover align-middle mb-0">
                 <thead className="table-light">
                   <tr className="small text-muted text-uppercase">
-                    <th>Room</th>
-                    <th>Category</th>
-                    <th>Price / Night</th>
+                    <th>Chamber</th>
+                    <th>Royal Category</th>
+                    <th>Tariff / Night (INR)</th>
                     <th>Capacity & Bed</th>
                     <th>Floor & Size</th>
                     <th>Availability Status</th>
@@ -211,18 +216,18 @@ const ManageRooms = () => {
                         </div>
                       </td>
                       <td>
-                        <span className="badge badge-gold">{room.roomType}</span>
+                        <span className="badge-royal">{room.roomType}</span>
                       </td>
-                      <td className="fw-bold text-dark font-serif fs-6">
-                        ${room.price}
+                      <td className="fw-bold text-dark font-regal fs-6" style={{ color: '#6e0d25' }}>
+                        ₹{room.price?.toLocaleString('en-IN')}
                       </td>
                       <td className="small text-secondary">
                         <div>{room.capacity} Guests</div>
-                        <div className="text-muted">{room.bedType} Bed</div>
+                        <div className="text-muted">{room.bedType}</div>
                       </td>
                       <td className="small text-secondary">
                         <div>Floor {room.floor || 1}</div>
-                        <div className="text-muted">{room.size || 350} sq ft</div>
+                        <div className="text-muted">{room.size || 550} sq ft</div>
                       </td>
                       <td>
                         <select
@@ -248,7 +253,7 @@ const ManageRooms = () => {
                           <Link
                             to={`/admin/rooms/edit/${room._id}`}
                             className="btn btn-sm btn-outline-primary p-2"
-                            title="Edit Room"
+                            title="Edit Suite"
                           >
                             <Edit size={15} />
                           </Link>
@@ -256,7 +261,7 @@ const ManageRooms = () => {
                             type="button"
                             onClick={() => handleDeleteRoom(room._id, room.roomNumber)}
                             className="btn btn-sm btn-outline-danger p-2"
-                            title="Delete Room"
+                            title="Delete Suite"
                           >
                             <Trash2 size={15} />
                           </button>

@@ -13,7 +13,9 @@ import {
   Clock,
   MapPin,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  Crown,
+  Sparkles
 } from 'lucide-react';
 
 const UserDashboard = () => {
@@ -64,24 +66,29 @@ const UserDashboard = () => {
   };
 
   if (loading) {
-    return <LoadingSpinner text="Loading your guest dashboard..." />;
+    return <LoadingSpinner text="Opening your royal guest portal..." />;
   }
 
   return (
-    <div className="py-5">
+    <div className="py-5" style={{ backgroundColor: '#fcfaf6' }}>
       <div className="container">
         {/* Welcome Header */}
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 pb-3 border-bottom">
           <div>
-            <span className="section-tag">Guest Portal</span>
-            <h1 className="display-6 fw-bold font-serif text-dark mb-1">
-              Welcome Back, {user?.name}
+            <div className="d-flex align-items-center gap-2 mb-1">
+              <span className="badge-royal">
+                <Crown size={12} className="me-1" /> शाही अतिथि कक्ष
+              </span>
+              <span className="text-muted small">Royal Patron Member</span>
+            </div>
+            <h1 className="display-6 fw-bold font-regal text-dark mb-1">
+              Welcome, {user?.name}
             </h1>
-            <p className="text-muted mb-0">Member since {new Date(user?.createdAt || Date.now()).toLocaleDateString()}</p>
+            <p className="text-muted mb-0">Royal patron since {new Date(user?.createdAt || Date.now()).toLocaleDateString()}</p>
           </div>
           <div className="mt-3 mt-md-0 d-flex gap-2">
-            <Link to="/rooms" className="btn btn-gold rounded-3 d-flex align-items-center gap-2">
-              <BedDouble size={16} /> Book Another Stay
+            <Link to="/rooms" className="btn btn-maroon rounded-3 d-flex align-items-center gap-2 shadow-sm">
+              <BedDouble size={16} /> Reserve Another Suite
             </Link>
           </div>
         </div>
@@ -89,10 +96,10 @@ const UserDashboard = () => {
         {/* 4 Metric Cards */}
         <div className="row g-4 mb-5">
           <div className="col-12 col-sm-6 col-lg-3">
-            <div className="stat-card">
+            <div className="stat-card" style={{ backgroundColor: '#ffffff' }}>
               <div>
-                <span className="text-muted small fw-bold">Active / Upcoming</span>
-                <h3 className="fw-bold text-dark font-serif mt-1 mb-0">{confirmedBookings.length}</h3>
+                <span className="text-muted small fw-bold">Active Royal Stays</span>
+                <h3 className="fw-bold text-dark font-regal mt-1 mb-0">{confirmedBookings.length}</h3>
               </div>
               <div className="stat-icon" style={{ backgroundColor: '#ecfdf5', color: '#059669' }}>
                 <CalendarCheck size={26} />
@@ -101,10 +108,10 @@ const UserDashboard = () => {
           </div>
 
           <div className="col-12 col-sm-6 col-lg-3">
-            <div className="stat-card">
+            <div className="stat-card" style={{ backgroundColor: '#ffffff' }}>
               <div>
                 <span className="text-muted small fw-bold">Total Reservations</span>
-                <h3 className="fw-bold text-dark font-serif mt-1 mb-0">{totalBookings}</h3>
+                <h3 className="fw-bold text-dark font-regal mt-1 mb-0">{totalBookings}</h3>
               </div>
               <div className="stat-icon" style={{ backgroundColor: '#eff6ff', color: '#2563eb' }}>
                 <BedDouble size={26} />
@@ -113,10 +120,10 @@ const UserDashboard = () => {
           </div>
 
           <div className="col-12 col-sm-6 col-lg-3">
-            <div className="stat-card">
+            <div className="stat-card" style={{ backgroundColor: '#ffffff' }}>
               <div>
                 <span className="text-muted small fw-bold">Cancelled Stays</span>
-                <h3 className="fw-bold text-dark font-serif mt-1 mb-0">{cancelledBookings.length}</h3>
+                <h3 className="fw-bold text-dark font-regal mt-1 mb-0">{cancelledBookings.length}</h3>
               </div>
               <div className="stat-icon" style={{ backgroundColor: '#fef2f2', color: '#dc2626' }}>
                 <CalendarX size={26} />
@@ -125,12 +132,14 @@ const UserDashboard = () => {
           </div>
 
           <div className="col-12 col-sm-6 col-lg-3">
-            <div className="stat-card">
+            <div className="stat-card" style={{ backgroundColor: '#ffffff' }}>
               <div>
-                <span className="text-muted small fw-bold">Total Spent</span>
-                <h3 className="fw-bold text-dark font-serif mt-1 mb-0">${totalSpent}</h3>
+                <span className="text-muted small fw-bold">Total Tariff Spent</span>
+                <h3 className="fw-bold text-dark font-regal mt-1 mb-0" style={{ color: '#6e0d25' }}>
+                  ₹{totalSpent.toLocaleString('en-IN')}
+                </h3>
               </div>
-              <div className="stat-icon" style={{ backgroundColor: '#fbf7f2', color: '#c5a880' }}>
+              <div className="stat-icon" style={{ backgroundColor: '#fff9ed', color: '#c99a3e' }}>
                 <CreditCard size={26} />
               </div>
             </div>
@@ -139,7 +148,7 @@ const UserDashboard = () => {
 
         {/* Next Upcoming Stay Card (if exists) */}
         {upcomingStay && (
-          <div className="card luxury-card p-4 mb-5 border-0 bg-white">
+          <div className="card luxury-card p-4 mb-5 border-0 bg-white shadow-sm" style={{ border: '1px solid #e8dec8' }}>
             <div className="row align-items-center g-4">
               <div className="col-12 col-md-4">
                 <img
@@ -150,27 +159,31 @@ const UserDashboard = () => {
                 />
               </div>
               <div className="col-12 col-md-5">
-                <span className="badge badge-gold mb-2">Next Upcoming Stay</span>
-                <h4 className="fw-bold font-serif text-dark mb-1">
-                  {upcomingStay.room?.roomType} Suite #{upcomingStay.room?.roomNumber}
+                <span className="badge-royal mb-2">
+                  <Sparkles size={12} className="me-1" /> Next Upcoming Stay
+                </span>
+                <h4 className="fw-bold font-regal text-dark mb-1">
+                  {upcomingStay.room?.roomType} #{upcomingStay.room?.roomNumber}
                 </h4>
                 <p className="text-muted small mb-2 d-flex align-items-center gap-1">
-                  <MapPin size={14} className="text-warning" /> 100 Grand Boulevard, Waterfront Harbor
+                  <MapPin size={14} className="text-warning" /> HotelPro Heritage Palace, Lake Pichola, Udaipur
                 </p>
                 <div className="d-flex align-items-center gap-3 text-secondary small">
                   <div>
-                    <strong>Check-in:</strong> {new Date(upcomingStay.checkIn).toLocaleDateString()}
+                    <strong>Check-in:</strong> {new Date(upcomingStay.checkIn).toLocaleDateString()} (2:00 PM)
                   </div>
                   <div>
-                    <strong>Check-out:</strong> {new Date(upcomingStay.checkOut).toLocaleDateString()}
+                    <strong>Check-out:</strong> {new Date(upcomingStay.checkOut).toLocaleDateString()} (12:00 PM)
                   </div>
                 </div>
               </div>
               <div className="col-12 col-md-3 text-md-end">
-                <div className="text-muted small">Reservation Ref</div>
-                <div className="fw-bold text-dark font-serif fs-5 mb-2">{upcomingStay.bookingId}</div>
+                <div className="text-muted small">Farman Ref</div>
+                <div className="fw-bold text-dark font-regal fs-5 mb-2" style={{ color: '#6e0d25' }}>
+                  {upcomingStay.bookingId}
+                </div>
                 <Link to={`/bookings/${upcomingStay._id}`} className="btn btn-outline-dark btn-sm rounded-3">
-                  View Voucher & Invoice
+                  View Farman & Voucher
                 </Link>
               </div>
             </div>
@@ -178,11 +191,11 @@ const UserDashboard = () => {
         )}
 
         {/* Recent Bookings Table */}
-        <div className="card luxury-card p-4 border-0">
+        <div className="card luxury-card p-4 border-0 shadow-sm" style={{ backgroundColor: '#ffffff' }}>
           <div className="d-flex align-items-center justify-content-between mb-4">
             <div>
-              <h5 className="fw-bold font-serif text-dark mb-1">Recent Booking History</h5>
-              <p className="text-muted small mb-0">Overview of your reservations and current payment statuses</p>
+              <h5 className="fw-bold font-regal text-dark mb-1">Recent Palace Reservations</h5>
+              <p className="text-muted small mb-0">Overview of your stay dates and current payment statuses</p>
             </div>
             <Link to="/my-bookings" className="btn btn-sm btn-outline-secondary rounded-pill px-3">
               View All Bookings
@@ -191,8 +204,8 @@ const UserDashboard = () => {
 
           {bookings.length === 0 ? (
             <EmptyState
-              title="No Bookings Found"
-              description="You have not made any reservations yet. Browse our luxury suites to plan your first stay."
+              title="No Reservations Recorded"
+              description="You have not reserved any palace suites yet. Explore our royal quarters to plan your royal getaway."
               actionText="Explore Suites"
               actionLink="/rooms"
             />
@@ -201,11 +214,11 @@ const UserDashboard = () => {
               <table className="table table-hover align-middle">
                 <thead className="table-light">
                   <tr className="small text-muted text-uppercase">
-                    <th>Booking Ref</th>
-                    <th>Suite / Room</th>
+                    <th>Farman Ref</th>
+                    <th>Chamber</th>
                     <th>Stay Dates</th>
                     <th>Guests</th>
-                    <th>Total</th>
+                    <th>Total Tariff</th>
                     <th>Payment</th>
                     <th>Status</th>
                     <th className="text-end">Action</th>
@@ -218,8 +231,8 @@ const UserDashboard = () => {
                         {booking.bookingId}
                       </td>
                       <td>
-                        <div className="fw-bold text-dark">{booking.room?.roomType}</div>
-                        <div className="text-muted small">Room #{booking.room?.roomNumber}</div>
+                        <div className="fw-bold text-dark font-regal">{booking.room?.roomType}</div>
+                        <div className="text-muted small">Chamber #{booking.room?.roomNumber}</div>
                       </td>
                       <td className="small text-secondary">
                         {new Date(booking.checkIn).toLocaleDateString()} &rarr; {new Date(booking.checkOut).toLocaleDateString()}
@@ -228,7 +241,9 @@ const UserDashboard = () => {
                         </div>
                       </td>
                       <td className="small text-secondary">{booking.guests} Guests</td>
-                      <td className="fw-bold text-dark">${booking.totalAmount}</td>
+                      <td className="fw-bold text-dark font-regal">
+                        ₹{booking.totalAmount?.toLocaleString('en-IN')}
+                      </td>
                       <td>
                         <span className={`badge ${booking.paymentStatus === 'Paid' ? 'bg-success-subtle text-success' : booking.paymentStatus === 'Refunded' ? 'bg-info-subtle text-info' : 'bg-warning-subtle text-warning'}`}>
                           {booking.paymentStatus}
@@ -240,7 +255,7 @@ const UserDashboard = () => {
                           to={`/bookings/${booking._id}`}
                           className="btn btn-sm btn-outline-dark rounded-3 px-3"
                         >
-                          Details
+                          Farman
                         </Link>
                       </td>
                     </tr>
